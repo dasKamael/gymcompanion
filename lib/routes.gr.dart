@@ -57,8 +57,10 @@ class AppRouter extends _i2.RootStackRouter {
           routeData: routeData, child: const _i5.Planpage());
     },
     CreatePlanRoute.name: (routeData) {
+      final args = routeData.argsAs<CreatePlanRouteArgs>(
+          orElse: () => const CreatePlanRouteArgs());
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i6.CreatePlanPage());
+          routeData: routeData, child: _i6.CreatePlanPage(key: args.key));
     },
     ProfileRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -165,10 +167,22 @@ class Planpage extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for [_i6.CreatePlanPage]
-class CreatePlanRoute extends _i2.PageRouteInfo<void> {
-  const CreatePlanRoute() : super(name, path: 'createPlan');
+class CreatePlanRoute extends _i2.PageRouteInfo<CreatePlanRouteArgs> {
+  CreatePlanRoute({_i8.Key? key})
+      : super(name, path: 'createPlan', args: CreatePlanRouteArgs(key: key));
 
   static const String name = 'CreatePlanRoute';
+}
+
+class CreatePlanRouteArgs {
+  const CreatePlanRouteArgs({this.key});
+
+  final _i8.Key? key;
+
+  @override
+  String toString() {
+    return 'CreatePlanRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for [_i7.ProfilePage]

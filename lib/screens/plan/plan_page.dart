@@ -5,9 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/components/default_appbar.dart';
 import 'package:gymcompanion/constants/colors.dart';
 import 'package:gymcompanion/constants/consts.dart';
-import 'package:gymcompanion/constants/text_styles.dart';
-import 'package:gymcompanion/routes.gr.dart';
-import 'package:gymcompanion/screens/plan/create_plan/create_plan_page.dart';
 
 class Planpage extends ConsumerWidget {
   const Planpage({Key? key}) : super(key: key);
@@ -25,6 +22,7 @@ class Planpage extends ConsumerWidget {
                   title: 'TRAININGSPLÄNE',
                   leading: Icon(
                     Icons.filter_alt,
+                    size: 28,
                     color: ConstColors.secondaryColor,
                   ),
                   actions: [
@@ -32,6 +30,7 @@ class Planpage extends ConsumerWidget {
                       onTap: () => context.router.pushNamed('createPlan'),
                       child: Icon(
                         Icons.add_circle_outline,
+                        size: 28,
                         color: ConstColors.secondaryColor,
                       ),
                     ),

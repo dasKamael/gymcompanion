@@ -1,0 +1,65 @@
+{
+	"imcom": {
+		"scope": "dart",
+		"prefix": "imcom",
+		"body": [
+			"import 'package:common/common.dart';",
+		],
+		"description": "import common package"
+	},
+	"Freezed DataZ": {
+		"prefix": "fdatacl",
+		"body": [
+			"import 'package:freezed_annotation/freezed_annotation.dart';",
+			"part '${TM_FILENAME_BASE}.freezed.dart';",
+			"part '${TM_FILENAME_BASE}.g.dart';",
+			"",
+			"@freezed",
+			"class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} with _$${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}{",
+			"  const factory ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}(${1}) = _${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g};",
+			"  factory ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}.fromJson(Map<String, dynamic> json) => _$${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}FromJson(json);",
+			"}"
+		],
+		"description": "Freezed Union"
+	},	
+	"Hook Widget Class": {
+		"prefix": "clhw",
+		"body": [
+			"import 'package:common/common.dart';",
+			"",
+			"class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} extends HookWidget {",
+			"\tconst ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}({Key? key}):super(key:key);",
+			"",
+			"\t@override",
+			"\tWidget build(BuildContext context) {",
+			"\treturn\t$0;",
+			"\t}",
+			"}"
+		],
+		"description": "Hook Widget File"
+	},
+	"Abstraction": {
+		"prefix": "clsa",
+		"body": [
+			"import 'package:common/common.dart';",
+			"",
+			"abstract class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} {",
+			"",
+			"\t$0",
+			"}"
+		],
+		"description": "Abstraction"
+	},
+	"Implementation": {
+		"prefix": "clsi",
+		"body": [
+			"import 'package:common/common.dart';",
+			"",
+			"class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} implements $1{",
+			"",
+			"\t$2",
+			"}"
+		],
+		"description": "Implementation"
+	},
+}
