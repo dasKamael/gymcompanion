@@ -1,6 +1,9 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gymcompanion/constants/consts.dart';
 import 'package:gymcompanion/models/exercise.dart';
 import 'package:gymcompanion/screens/plan/create_plan/create_plan_state.dart';
 
@@ -25,16 +28,20 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
 
   void initCreatePlanPage() {
     // Get available Exercises
-    state = state.copyWith(exercises: [
-      Exercise(id: 1, name: 'Curl'),
-      Exercise(id: 2, name: 'Lats'),
-      Exercise(id: 3, name: 'Trizeps'),
-      Exercise(id: 4, name: 'Bench press'),
-      Exercise(id: 5, name: 'Curl'),
-      Exercise(id: 6, name: 'Lats'),
-      Exercise(id: 7, name: 'Trizeps'),
-      Exercise(id: 8, name: 'Bench press'),
-    ]);
+    state = state.copyWith(exercises: []);
+    getExercises();
+  }
+
+  Future<void> getExercises() async {
+    final dio = Dio();
+    final url = '${ConstValues.url}/exercise';
+
+    Response response = await dio.get(url);
+    for (final data in response.data['result']) {
+      log(data.toString());
+      state.exercises.add(Exercise.fromJson(data));
+    }
+    state = state.copyWith();
   }
 
   void reorderExerciseList(int oldIndex, int newIndex) {
