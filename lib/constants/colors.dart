@@ -5,5 +5,6 @@ class ConstColors {
   static const secondaryColor = Color(0xFF5BC598);
   static const unselected = Color(0xFF3D8567);
   static const textFieldColor = Color(0xFF767DA4);
+  static const buttonColor = Color(0xFF17181F);
   static const warn = Color(0xFFCE4B4B);
 }

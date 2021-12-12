@@ -15,12 +15,7 @@ final createPlanProvider =
 class CreatePlanController extends StateNotifier<CreatePlanState> {
   CreatePlanController()
       : super(CreatePlanState(
-          exercises: [
-            Exercise(id: 1, name: 'Curl'),
-            Exercise(id: 2, name: 'Lats'),
-            Exercise(id: 3, name: 'Trizeps'),
-            Exercise(id: 4, name: 'Bench press'),
-          ],
+          exercises: [],
           selectedExercises: [],
         )) {
     initCreatePlanPage();
@@ -28,7 +23,6 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
 
   void initCreatePlanPage() {
     // Get available Exercises
-    state = state.copyWith(exercises: []);
     getExercises();
   }
 
