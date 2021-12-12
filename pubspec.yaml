@@ -34,6 +34,7 @@ dependencies:
   salomon_bottom_bar: ^3.2.0
   google_fonts: ^2.1.0
   dropdown_search: ^2.0.1
+  another_flushbar: ^1.10.28
 
 dev_dependencies:
   flutter_test:

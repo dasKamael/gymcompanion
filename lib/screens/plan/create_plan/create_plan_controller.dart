@@ -1,7 +1,10 @@
 import 'dart:developer';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gymcompanion/constants/colors.dart';
 import 'package:gymcompanion/constants/consts.dart';
 import 'package:gymcompanion/models/exercise.dart';
 import 'package:gymcompanion/models/plan.dart';
@@ -62,20 +65,47 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
     state = state.copyWith(name: value);
   }
 
-  Future<void> createPlan() async {
-    Map<String, dynamic> body = {'name': state.name, 'userId': 1};
+  Future<void> createPlan(BuildContext context) async {
+    if (state.selectedExercises.isNotEmpty) {
+      final dio = Dio();
+      final url = '${ConstValues.url}/plans/createPlan';
 
-    List<int> exercises = [];
-    for (final exercise in state.selectedExercises) {
-      exercises.add(exercise.id);
+      Map<String, dynamic> body = {'name': state.name, 'userId': 1};
+
+      List<int> exercises = [];
+      for (final exercise in state.selectedExercises) {
+        exercises.add(exercise.id);
+      }
+      body.addAll({'exercises': exercises});
+
+      Response response = await dio.post(url, queryParameters: body);
+
+      if (response.data['message'] == 'PLAN_ALREADY_EXISTS') {
+        await Flushbar(
+          icon: Icon(Icons.error_outline, color: ConstColors.error),
+          message: 'Plan name bereits vorhanden',
+          backgroundColor: ConstColors.buttonColor,
+          messageColor: ConstColors.error,
+          duration: Duration(seconds: 3),
+        ).show(context);
+      } else {
+        await Flushbar(
+          icon: Icon(Icons.check_circle_outline, color: ConstColors.secondaryColor),
+          message: 'Plan erfolgreich erstellt',
+          backgroundColor: ConstColors.buttonColor,
+          messageColor: ConstColors.secondaryColor,
+          duration: Duration(seconds: 3),
+        ).show(context);
+      }
+    } else {
+      await Flushbar(
+        icon: Icon(Icons.error_outline, color: ConstColors.warn),
+        message: 'Mindestens eine Übung hinzufügen',
+        backgroundColor: ConstColors.buttonColor,
+        messageColor: ConstColors.warn,
+        duration: Duration(seconds: 3),
+      ).show(context);
     }
-    body.addAll({'exercises': exercises});
-
-    final dio = Dio();
-    final url = '${ConstValues.url}/plans/createPlan';
-
-    await dio.post(url, queryParameters: body);
-
     state = state.copyWith();
   }
 }

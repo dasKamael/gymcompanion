@@ -5,7 +5,7 @@ class ConstDarkTheme {
   static ThemeData darkTheme = ThemeData(
     primaryColor: ConstColors.primaryColor,
     primaryColorLight: ConstColors.primaryColor,
-    errorColor: ConstColors.warn,
+    errorColor: ConstColors.error,
     canvasColor: ConstColors.primaryColor,
     textTheme: TextTheme(subtitle1: TextStyle(color: ConstColors.secondaryColor)),
   );
