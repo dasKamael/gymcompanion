@@ -12,7 +12,6 @@ _$_Plan _$$_PlanFromJson(Map<String, dynamic> json) => _$_Plan(
       exercises: (json['exercises'] as List<dynamic>)
           .map((e) => Exercise.fromJson(e as Map<String, dynamic>))
           .toList(),
-      lastDoneTimeStamp: json['lastDoneTimeStamp'] as int? ?? 0,
       createdTimeStamp: json['createdTimeStamp'] as int,
     );
 
@@ -20,6 +19,5 @@ Map<String, dynamic> _$$_PlanToJson(_$_Plan instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'exercises': instance.exercises,
-      'lastDoneTimeStamp': instance.lastDoneTimeStamp,
       'createdTimeStamp': instance.createdTimeStamp,
     };

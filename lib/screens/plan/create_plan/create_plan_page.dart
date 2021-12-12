@@ -43,6 +43,8 @@ class CreatePlanPage extends ConsumerWidget {
                           name: 'name',
                           style: ConstTextStyles.textField,
                           decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'NAME'),
+                          onChanged: (value) =>
+                              ref.read(createPlanProvider.notifier).setPlanName(value!),
                         ),
                         SizedBox(height: 32.0),
                         DropdownSearch<Exercise>.multiSelection(
@@ -110,8 +112,11 @@ class CreatePlanPage extends ConsumerWidget {
               ),
             ),
             Positioned(
-              bottom: 16,
-              child: DefaultButton(text: 'CREATE', onClick: () {}),
+              bottom: ConstValues.defaultSidePadding,
+              child: DefaultButton(
+                text: 'CREATE',
+                onClick: () => ref.read(createPlanProvider.notifier).createPlan(),
+              ),
             )
           ],
         ),

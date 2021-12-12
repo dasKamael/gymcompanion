@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gymcompanion/constants/consts.dart';
 import 'package:gymcompanion/models/exercise.dart';
+import 'package:gymcompanion/models/plan.dart';
 import 'package:gymcompanion/screens/plan/create_plan/create_plan_state.dart';
 
 final createPlanProvider =
@@ -58,6 +58,24 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
     state = state.copyWith();
   }
 
-  // TODO - CREATE PLAN
-  void createPlan() {}
+  void setPlanName(String value) {
+    state = state.copyWith(name: value);
+  }
+
+  Future<void> createPlan() async {
+    Map<String, dynamic> body = {'name': state.name, 'userId': 1};
+
+    List<int> exercises = [];
+    for (final exercise in state.selectedExercises) {
+      exercises.add(exercise.id);
+    }
+    body.addAll({'exercises': exercises});
+
+    final dio = Dio();
+    final url = '${ConstValues.url}/plans/createPlan';
+
+    await dio.post(url, queryParameters: body);
+
+    state = state.copyWith();
+  }
 }
