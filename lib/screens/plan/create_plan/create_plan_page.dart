@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -41,22 +42,24 @@ class CreatePlanPage extends ConsumerWidget {
                       decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'NAME'),
                     ),
                     SizedBox(height: 32.0),
-                    FormBuilderDropdown(
-                      name: 'exercise',
-                      style: ConstTextStyles.textField,
-                      decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'EXERCISE'),
-                      onChanged: (Map<String, Object>? value) {
-                        ref.read(createPlanProvider.notifier).addExerciseToList(value!);
-                      },
-                      items: state.exercises
-                          .map(
-                            (exercise) => DropdownMenuItem(
-                              key: ValueKey<int>(exercise.id),
-                              value: {'id': exercise.id, 'name': exercise.name},
-                              child: Text(exercise.name),
-                            ),
-                          )
-                          .toList(),
+                    DropdownSearch<Exercise>.multiSelection(
+                      mode: Mode.BOTTOM_SHEET,
+                      showSearchBox: true,
+                      selectedItems: state.selectedExercises,
+                      popupItemBuilder: (context, item, isSelected) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(item.name, style: ConstTextStyles.textField),
+                      ),
+                      items: state.exercises.map((exercise) => exercise).toSet().toList(),
+                      dropdownBuilder: (context, selectedItems) =>
+                          Text('SELECT EXERCISE', style: ConstTextStyles.textField),
+                      popupBackgroundColor: ConstColors.primaryColor,
+                      dropdownSearchBaseStyle: ConstTextStyles.textField,
+                      dropdownSearchDecoration: ConstTextStyles.defaultInput,
+                      popupOnItemAdded: (selectedItems, item) =>
+                          ref.read(createPlanProvider.notifier).addExerciseToList(item),
+                      popupOnItemRemoved: (selectedItems, item) =>
+                          ref.read(createPlanProvider.notifier).removeExerciseFromList(item),
                     ),
                     ReorderableListView(
                       shrinkWrap: true,
@@ -65,8 +68,9 @@ class CreatePlanPage extends ConsumerWidget {
                           Dismissible(
                             key: ValueKey<int>(state.selectedExercises[i].id),
                             direction: DismissDirection.endToStart,
-                            onDismissed: (direction) =>
-                                ref.read(createPlanProvider.notifier).removeExerciseFromList(i),
+                            onDismissed: (direction) => ref
+                                .read(createPlanProvider.notifier)
+                                .removeExerciseFromList(state.selectedExercises[i]),
                             background: Container(
                               color: ConstColors.warn,
                               child: Align(

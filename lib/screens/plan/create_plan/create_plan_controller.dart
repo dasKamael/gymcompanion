@@ -23,7 +23,19 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
     initCreatePlanPage();
   }
 
-  void initCreatePlanPage() {}
+  void initCreatePlanPage() {
+    // Get available Exercises
+    state = state.copyWith(exercises: [
+      Exercise(id: 1, name: 'Curl'),
+      Exercise(id: 2, name: 'Lats'),
+      Exercise(id: 3, name: 'Trizeps'),
+      Exercise(id: 4, name: 'Bench press'),
+      Exercise(id: 5, name: 'Curl'),
+      Exercise(id: 6, name: 'Lats'),
+      Exercise(id: 7, name: 'Trizeps'),
+      Exercise(id: 8, name: 'Bench press'),
+    ]);
+  }
 
   void reorderExerciseList(int oldIndex, int newIndex) {
     if (oldIndex < newIndex) {
@@ -35,13 +47,16 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
     state = state.copyWith();
   }
 
-  void addExerciseToList(Map<String, dynamic> value) {
-    //state.selectedExercises.add(Exercise(id: value['id'], name: value['name']));
+  void addExerciseToList(Exercise exercise) {
+    state.selectedExercises.add(exercise);
     state = state.copyWith();
   }
 
-  void removeExerciseFromList(int index) {
-    state.selectedExercises.removeAt(index);
+  void removeExerciseFromList(Exercise exercise) {
+    state.selectedExercises.remove(exercise);
     state = state.copyWith();
   }
+
+  // TODO - CREATE PLAN
+  void createPlan() {}
 }
