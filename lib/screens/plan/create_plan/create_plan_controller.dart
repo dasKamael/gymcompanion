@@ -8,21 +8,24 @@ import 'package:gymcompanion/constants/colors.dart';
 import 'package:gymcompanion/constants/consts.dart';
 import 'package:gymcompanion/models/exercise.dart';
 import 'package:gymcompanion/models/plan.dart';
+import 'package:gymcompanion/providers/init_provider.dart';
 import 'package:gymcompanion/screens/plan/create_plan/create_plan_state.dart';
 
 final createPlanProvider =
     StateNotifierProvider.autoDispose<CreatePlanController, CreatePlanState>((ref) {
-  return CreatePlanController();
+  return CreatePlanController(ref.read);
 });
 
 class CreatePlanController extends StateNotifier<CreatePlanState> {
-  CreatePlanController()
+  CreatePlanController(this._read)
       : super(CreatePlanState(
           exercises: [],
           selectedExercises: [],
         )) {
     initCreatePlanPage();
   }
+
+  Reader _read;
 
   void initCreatePlanPage() {
     // Get available Exercises
@@ -89,6 +92,7 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
           duration: Duration(seconds: 3),
         ).show(context);
       } else {
+        Navigator.pop(context);
         await Flushbar(
           icon: Icon(Icons.check_circle_outline, color: ConstColors.secondaryColor),
           message: 'Plan erfolgreich erstellt',

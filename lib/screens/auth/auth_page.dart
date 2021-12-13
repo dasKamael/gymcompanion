@@ -36,7 +36,7 @@ class AuthPage extends ConsumerWidget {
                             name: 'email',
                             style: ConstTextStyles.textField,
                             keyboardType: TextInputType.emailAddress,
-                            decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'NAME'),
+                            decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'EMAIL'),
                             onChanged: (value) =>
                                 ref.read(authControllerProvider.notifier).changeEmail(value!),
                           ),
@@ -48,13 +48,19 @@ class AuthPage extends ConsumerWidget {
                             decoration:
                                 ConstTextStyles.defaultInput.copyWith(labelText: 'PASSWORD'),
                             onChanged: (value) =>
-                                ref.read(authControllerProvider.notifier).changeEmail(value!),
+                                ref.read(authControllerProvider.notifier).changePassword(value!),
                           ),
                           SizedBox(height: ConstValues.defaultSidePadding),
                           DefaultButton(
-                            onClick: () =>
-                                ref.read(authControllerProvider.notifier).signIn(context),
+                            onClick: () => ref
+                                .read(authControllerProvider.notifier)
+                                .signInWithEmailAndPassword(),
                             text: 'LOGIN',
+                          ),
+                          TextButton(
+                            onPressed: () =>
+                                ref.read(authControllerProvider.notifier).signInAnonymously(),
+                            child: Text('LOGIN ANONYMOUS', style: ConstTextStyles.subtle16),
                           ),
                           TextButton(
                             onPressed: () {},

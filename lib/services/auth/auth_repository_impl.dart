@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/providers/auth_provider.dart';
+import 'package:gymcompanion/providers/init_provider.dart';
 import 'package:gymcompanion/services/auth/auth_repository.dart';
+
+import '../../routes.gr.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this._read);
@@ -25,13 +28,14 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
+  Future<void> signInWithEmailAndPassword({required String email, required String password}) async {
     await _read(firebaseAuthProvider).signInWithEmailAndPassword(email: email, password: password);
   }
 
   @override
   Future<void> signOut() async {
     await _read(firebaseAuthProvider).signOut();
-    // await _read(firebaseAuthProvider).signInAnonymously();
+    _read(routeProvider).popUntilRouteWithName('/');
+    await _read(routeProvider).push(AuthRoute());
   }
 }
