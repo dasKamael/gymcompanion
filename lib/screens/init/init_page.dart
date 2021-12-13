@@ -12,7 +12,23 @@ class InitPage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: ConstColors.primaryColor,
       body: Center(
-        child: Text('GYM-COMPANION', style: ConstTextStyles.header1),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('GYM-COMPANION', style: ConstTextStyles.header1),
+            if (state.isLoading) CircularProgressIndicator(color: ConstColors.secondaryColor),
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(bottom: ConstValues.defaultButtonHeight),
+            //     child: DefaultButton(
+            //       text: 'GO TO LOGIN',
+            //       onClick: () {},
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }

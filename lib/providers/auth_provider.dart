@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gymcompanion/providers/user_provider.dart';
+import 'package:gymcompanion/providers/user/user_provider.dart';
 import 'package:gymcompanion/services/auth/auth_repository.dart';
 import 'package:gymcompanion/services/auth/auth_repository_impl.dart';
 
@@ -15,7 +15,5 @@ final authRepositoryProvider = Provider<AuthRepository>(
 );
 
 final userStateProvider = StateProvider<UserStateNotifier>(
-  (ref) => UserStateNotifier(
-    ref.read,
-  )..appInit(),
+  (ref) => UserStateNotifier(ref.read),
 );

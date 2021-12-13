@@ -13,8 +13,7 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: ConstValues.defaultButtonHeight,
-      width: MediaQuery.of(context).size.width -
-          (2 * ConstValues.defaultSidePadding), // TODO make it cleaner
+      width: MediaQuery.of(context).size.width - (2 * ConstValues.defaultSidePadding),
       decoration: BoxDecoration(
         color: ConstColors.buttonColor,
         borderRadius: BorderRadius.all(Radius.circular(ConstValues.defaultTextFieldBorderRadius)),

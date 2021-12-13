@@ -21,8 +21,10 @@ InitPageState _$InitPageStateFromJson(Map<String, dynamic> json) {
 class _$InitPageStateTearOff {
   const _$InitPageStateTearOff();
 
-  _InitPageState call() {
-    return const _InitPageState();
+  _InitPageState call({required bool isLoading}) {
+    return _InitPageState(
+      isLoading: isLoading,
+    );
   }
 
   InitPageState fromJson(Map<String, Object?> json) {
@@ -35,7 +37,12 @@ const $InitPageState = _$InitPageStateTearOff();
 
 /// @nodoc
 mixin _$InitPageState {
+  bool get isLoading => throw _privateConstructorUsedError;
+
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $InitPageStateCopyWith<InitPageState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -43,6 +50,7 @@ abstract class $InitPageStateCopyWith<$Res> {
   factory $InitPageStateCopyWith(
           InitPageState value, $Res Function(InitPageState) then) =
       _$InitPageStateCopyWithImpl<$Res>;
+  $Res call({bool isLoading});
 }
 
 /// @nodoc
@@ -53,13 +61,28 @@ class _$InitPageStateCopyWithImpl<$Res>
   final InitPageState _value;
   // ignore: unused_field
   final $Res Function(InitPageState) _then;
+
+  @override
+  $Res call({
+    Object? isLoading = freezed,
+  }) {
+    return _then(_value.copyWith(
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$InitPageStateCopyWith<$Res> {
+abstract class _$InitPageStateCopyWith<$Res>
+    implements $InitPageStateCopyWith<$Res> {
   factory _$InitPageStateCopyWith(
           _InitPageState value, $Res Function(_InitPageState) then) =
       __$InitPageStateCopyWithImpl<$Res>;
+  @override
+  $Res call({bool isLoading});
 }
 
 /// @nodoc
@@ -72,29 +95,52 @@ class __$InitPageStateCopyWithImpl<$Res>
 
   @override
   _InitPageState get _value => super._value as _InitPageState;
+
+  @override
+  $Res call({
+    Object? isLoading = freezed,
+  }) {
+    return _then(_InitPageState(
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$_InitPageState implements _InitPageState {
-  const _$_InitPageState();
+  const _$_InitPageState({required this.isLoading});
 
   factory _$_InitPageState.fromJson(Map<String, dynamic> json) =>
       _$$_InitPageStateFromJson(json);
 
   @override
+  final bool isLoading;
+
+  @override
   String toString() {
-    return 'InitPageState()';
+    return 'InitPageState(isLoading: $isLoading)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _InitPageState);
+        (other.runtimeType == runtimeType &&
+            other is _InitPageState &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(isLoading));
+
+  @JsonKey(ignore: true)
+  @override
+  _$InitPageStateCopyWith<_InitPageState> get copyWith =>
+      __$InitPageStateCopyWithImpl<_InitPageState>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -103,8 +149,15 @@ class _$_InitPageState implements _InitPageState {
 }
 
 abstract class _InitPageState implements InitPageState {
-  const factory _InitPageState() = _$_InitPageState;
+  const factory _InitPageState({required bool isLoading}) = _$_InitPageState;
 
   factory _InitPageState.fromJson(Map<String, dynamic> json) =
       _$_InitPageState.fromJson;
+
+  @override
+  bool get isLoading;
+  @override
+  @JsonKey(ignore: true)
+  _$InitPageStateCopyWith<_InitPageState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
