@@ -19,60 +19,132 @@ class AuthPage extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: ConstValues.defaultSidePadding),
         child: Stack(
           children: [
-            DefaultAppBar(title: 'LOGIN'),
+            DefaultAppBar(title: state.isLoginPage ? 'LOGIN' : 'REGISTER'),
             if (state.isLoading)
               Center(child: CircularProgressIndicator(color: ConstColors.secondaryColor))
             else
-              Align(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FormBuilder(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FormBuilderTextField(
-                            name: 'email',
-                            style: ConstTextStyles.textField,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'EMAIL'),
-                            onChanged: (value) =>
-                                ref.read(authControllerProvider.notifier).changeEmail(value!),
-                          ),
-                          SizedBox(height: ConstValues.defaultSidePadding),
-                          FormBuilderTextField(
-                            name: 'password',
-                            obscureText: true,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration:
-                                ConstTextStyles.defaultInput.copyWith(labelText: 'PASSWORD'),
-                            onChanged: (value) =>
-                                ref.read(authControllerProvider.notifier).changePassword(value!),
-                          ),
-                          SizedBox(height: ConstValues.defaultSidePadding),
-                          DefaultButton(
-                            onClick: () => ref
-                                .read(authControllerProvider.notifier)
-                                .signInWithEmailAndPassword(),
-                            text: 'LOGIN',
-                          ),
-                          TextButton(
-                            onPressed: () =>
-                                ref.read(authControllerProvider.notifier).signInAnonymously(),
-                            child: Text('LOGIN ANONYMOUS', style: ConstTextStyles.subtle16),
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: Text('REGISTER', style: ConstTextStyles.subtle16),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              state.isLoginPage ? LoginComponent() : RegisterComponent(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class LoginComponent extends ConsumerWidget {
+  const LoginComponent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final stateNotifier = ref.read(authControllerProvider.notifier);
+    return Align(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FormBuilder(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FormBuilderTextField(
+                  name: 'email',
+                  style: ConstTextStyles.textField,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'EMAIL'),
+                  onChanged: (value) => stateNotifier.changeEmail(value!),
+                ),
+                SizedBox(height: ConstValues.defaultSidePadding),
+                FormBuilderTextField(
+                  name: 'password',
+                  obscureText: true,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'PASSWORD'),
+                  onChanged: (value) => stateNotifier.changePassword(value!),
+                ),
+                SizedBox(height: ConstValues.defaultSidePadding),
+                DefaultButton(
+                  onClick: () => stateNotifier.signInWithEmailAndPassword(context),
+                  text: 'LOGIN',
+                ),
+                TextButton(
+                  onPressed: () => stateNotifier.signInAnonymously(),
+                  child: Text('LOGIN ANONYMOUS', style: ConstTextStyles.subtle16),
+                ),
+                TextButton(
+                  onPressed: () => stateNotifier.switchToRegisterPage(),
+                  child: Text('REGISTER', style: ConstTextStyles.subtle16),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class RegisterComponent extends ConsumerWidget {
+  const RegisterComponent({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final stateNotifier = ref.read(authControllerProvider.notifier);
+    return Align(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FormBuilder(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FormBuilderTextField(
+                  name: 'username',
+                  style: ConstTextStyles.textField,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'USERNAME'),
+                  onChanged: (value) =>
+                      ref.read(authControllerProvider.notifier).changeUserName(value!),
+                ),
+                SizedBox(height: ConstValues.defaultSidePadding),
+                FormBuilderTextField(
+                  name: 'email',
+                  style: ConstTextStyles.textField,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'EMAIL'),
+                  onChanged: (value) =>
+                      ref.read(authControllerProvider.notifier).changeEmail(value!),
+                ),
+                SizedBox(height: ConstValues.defaultSidePadding),
+                FormBuilderTextField(
+                  name: 'password',
+                  obscureText: true,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'PASSWORD'),
+                  onChanged: (value) =>
+                      ref.read(authControllerProvider.notifier).changePassword(value!),
+                ),
+                SizedBox(height: ConstValues.defaultSidePadding),
+                FormBuilderTextField(
+                  name: 'repeatpassword',
+                  obscureText: true,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'REPEAT PASSWORD'),
+                  onChanged: (value) =>
+                      ref.read(authControllerProvider.notifier).changePassword(value!),
+                ),
+                SizedBox(height: ConstValues.defaultSidePadding),
+                DefaultButton(
+                  onClick: () => ref
+                      .read(authControllerProvider.notifier)
+                      .createUserWithEmailAndPassword(context),
+                  text: 'REGISTER',
+                ),
+                TextButton(
+                  onPressed: () => stateNotifier.switchToLoginPage(),
+                  child: Text('BACK TO LOGIN', style: ConstTextStyles.subtle16),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

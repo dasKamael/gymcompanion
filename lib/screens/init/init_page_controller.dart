@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:gymcompanion/providers/providers.dart';
 import 'package:gymcompanion/providers/user/user_provider.dart';
 import 'package:gymcompanion/routes.gr.dart';
@@ -19,15 +21,14 @@ class InitPageController extends StateNotifier<InitPageState> {
     state = state.copyWith(isLoading: true);
     // Check if user is already Logged in on device
     if (await _read(authServiceProvider).isAuthenticated()) {
-      await _read(userStateProvider).getUser();
+      log('USER IS AUTHENTICATED');
+      await _read(userProvider.notifier).getUser();
       state = state.copyWith(isLoading: false);
-
-      await _read(routeProvider).pop();
-      await _read(routeProvider).push(MainNavigationRoute());
+      await _read(routeProvider).popAndPush(MainNavigationRoute());
     } else {
+      log('USER IS NOT AUTHENTICATED');
       state = state.copyWith(isLoading: false);
-      await _read(routeProvider).pop();
-      await _read(routeProvider).push(AuthRoute());
+      await _read(routeProvider).popAndPush(AuthRoute());
     }
   }
 }

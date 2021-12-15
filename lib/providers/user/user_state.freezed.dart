@@ -24,15 +24,11 @@ class _$UserStateTearOff {
   _UserState call(
       {required int id,
       required String firebase_id,
-      required String userName,
-      required int created_at,
-      required int last_login}) {
+      required String userName}) {
     return _UserState(
       id: id,
       firebase_id: firebase_id,
       userName: userName,
-      created_at: created_at,
-      last_login: last_login,
     );
   }
 
@@ -49,8 +45,6 @@ mixin _$UserState {
   int get id => throw _privateConstructorUsedError;
   String get firebase_id => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
-  int get created_at => throw _privateConstructorUsedError;
-  int get last_login => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,12 +56,7 @@ mixin _$UserState {
 abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res>;
-  $Res call(
-      {int id,
-      String firebase_id,
-      String userName,
-      int created_at,
-      int last_login});
+  $Res call({int id, String firebase_id, String userName});
 }
 
 /// @nodoc
@@ -83,8 +72,6 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
     Object? id = freezed,
     Object? firebase_id = freezed,
     Object? userName = freezed,
-    Object? created_at = freezed,
-    Object? last_login = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -99,14 +86,6 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
-      created_at: created_at == freezed
-          ? _value.created_at
-          : created_at // ignore: cast_nullable_to_non_nullable
-              as int,
-      last_login: last_login == freezed
-          ? _value.last_login
-          : last_login // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -117,12 +96,7 @@ abstract class _$UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
           _UserState value, $Res Function(_UserState) then) =
       __$UserStateCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int id,
-      String firebase_id,
-      String userName,
-      int created_at,
-      int last_login});
+  $Res call({int id, String firebase_id, String userName});
 }
 
 /// @nodoc
@@ -139,8 +113,6 @@ class __$UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
     Object? id = freezed,
     Object? firebase_id = freezed,
     Object? userName = freezed,
-    Object? created_at = freezed,
-    Object? last_login = freezed,
   }) {
     return _then(_UserState(
       id: id == freezed
@@ -155,14 +127,6 @@ class __$UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
-      created_at: created_at == freezed
-          ? _value.created_at
-          : created_at // ignore: cast_nullable_to_non_nullable
-              as int,
-      last_login: last_login == freezed
-          ? _value.last_login
-          : last_login // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -171,11 +135,7 @@ class __$UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserState implements _UserState {
   const _$_UserState(
-      {required this.id,
-      required this.firebase_id,
-      required this.userName,
-      required this.created_at,
-      required this.last_login});
+      {required this.id, required this.firebase_id, required this.userName});
 
   factory _$_UserState.fromJson(Map<String, dynamic> json) =>
       _$$_UserStateFromJson(json);
@@ -186,14 +146,10 @@ class _$_UserState implements _UserState {
   final String firebase_id;
   @override
   final String userName;
-  @override
-  final int created_at;
-  @override
-  final int last_login;
 
   @override
   String toString() {
-    return 'UserState(id: $id, firebase_id: $firebase_id, userName: $userName, created_at: $created_at, last_login: $last_login)';
+    return 'UserState(id: $id, firebase_id: $firebase_id, userName: $userName)';
   }
 
   @override
@@ -204,11 +160,7 @@ class _$_UserState implements _UserState {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
                 .equals(other.firebase_id, firebase_id) &&
-            const DeepCollectionEquality().equals(other.userName, userName) &&
-            const DeepCollectionEquality()
-                .equals(other.created_at, created_at) &&
-            const DeepCollectionEquality()
-                .equals(other.last_login, last_login));
+            const DeepCollectionEquality().equals(other.userName, userName));
   }
 
   @override
@@ -216,9 +168,7 @@ class _$_UserState implements _UserState {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(firebase_id),
-      const DeepCollectionEquality().hash(userName),
-      const DeepCollectionEquality().hash(created_at),
-      const DeepCollectionEquality().hash(last_login));
+      const DeepCollectionEquality().hash(userName));
 
   @JsonKey(ignore: true)
   @override
@@ -235,9 +185,7 @@ abstract class _UserState implements UserState {
   const factory _UserState(
       {required int id,
       required String firebase_id,
-      required String userName,
-      required int created_at,
-      required int last_login}) = _$_UserState;
+      required String userName}) = _$_UserState;
 
   factory _UserState.fromJson(Map<String, dynamic> json) =
       _$_UserState.fromJson;
@@ -248,10 +196,6 @@ abstract class _UserState implements UserState {
   String get firebase_id;
   @override
   String get userName;
-  @override
-  int get created_at;
-  @override
-  int get last_login;
   @override
   @JsonKey(ignore: true)
   _$UserStateCopyWith<_UserState> get copyWith =>

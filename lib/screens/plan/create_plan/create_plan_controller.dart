@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/colors.dart';
 import 'package:gymcompanion/constants/consts.dart';
 import 'package:gymcompanion/models/exercise.dart';
+import 'package:gymcompanion/providers/user/user_provider.dart';
 import 'package:gymcompanion/screens/plan/create_plan/create_plan_state.dart';
 
 final createPlanProvider =
@@ -71,7 +72,7 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
       final dio = Dio();
       final url = '${ConstValues.url}/plans/createPlan';
 
-      Map<String, dynamic> body = {'name': state.name, 'userId': 1};
+      Map<String, dynamic> body = {'name': state.name, 'userId': _read(userProvider).id};
 
       List<int> exercises = [];
       for (final exercise in state.selectedExercises) {

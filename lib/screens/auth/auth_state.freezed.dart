@@ -19,13 +19,17 @@ class _$AuthStateTearOff {
 
   _AuthState call(
       {required bool isLoading,
+      required String userName,
       required String email,
       required String password,
+      required bool isLoginPage,
       String? errorMessage}) {
     return _AuthState(
       isLoading: isLoading,
+      userName: userName,
       email: email,
       password: password,
+      isLoginPage: isLoginPage,
       errorMessage: errorMessage,
     );
   }
@@ -37,8 +41,10 @@ const $AuthState = _$AuthStateTearOff();
 /// @nodoc
 mixin _$AuthState {
   bool get isLoading => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  bool get isLoginPage => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -51,7 +57,12 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res>;
   $Res call(
-      {bool isLoading, String email, String password, String? errorMessage});
+      {bool isLoading,
+      String userName,
+      String email,
+      String password,
+      bool isLoginPage,
+      String? errorMessage});
 }
 
 /// @nodoc
@@ -65,8 +76,10 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
   @override
   $Res call({
     Object? isLoading = freezed,
+    Object? userName = freezed,
     Object? email = freezed,
     Object? password = freezed,
+    Object? isLoginPage = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
@@ -74,6 +87,10 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -82,6 +99,10 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoginPage: isLoginPage == freezed
+          ? _value.isLoginPage
+          : isLoginPage // ignore: cast_nullable_to_non_nullable
+              as bool,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -97,7 +118,12 @@ abstract class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
       __$AuthStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {bool isLoading, String email, String password, String? errorMessage});
+      {bool isLoading,
+      String userName,
+      String email,
+      String password,
+      bool isLoginPage,
+      String? errorMessage});
 }
 
 /// @nodoc
@@ -112,8 +138,10 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = freezed,
+    Object? userName = freezed,
     Object? email = freezed,
     Object? password = freezed,
+    Object? isLoginPage = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_AuthState(
@@ -121,6 +149,10 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -129,6 +161,10 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoginPage: isLoginPage == freezed
+          ? _value.isLoginPage
+          : isLoginPage // ignore: cast_nullable_to_non_nullable
+              as bool,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -142,22 +178,28 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 class _$_AuthState implements _AuthState {
   const _$_AuthState(
       {required this.isLoading,
+      required this.userName,
       required this.email,
       required this.password,
+      required this.isLoginPage,
       this.errorMessage});
 
   @override
   final bool isLoading;
   @override
+  final String userName;
+  @override
   final String email;
   @override
   final String password;
+  @override
+  final bool isLoginPage;
   @override
   final String? errorMessage;
 
   @override
   String toString() {
-    return 'AuthState(isLoading: $isLoading, email: $email, password: $password, errorMessage: $errorMessage)';
+    return 'AuthState(isLoading: $isLoading, userName: $userName, email: $email, password: $password, isLoginPage: $isLoginPage, errorMessage: $errorMessage)';
   }
 
   @override
@@ -166,8 +208,11 @@ class _$_AuthState implements _AuthState {
         (other.runtimeType == runtimeType &&
             other is _AuthState &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality()
+                .equals(other.isLoginPage, isLoginPage) &&
             const DeepCollectionEquality()
                 .equals(other.errorMessage, errorMessage));
   }
@@ -176,8 +221,10 @@ class _$_AuthState implements _AuthState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(isLoginPage),
       const DeepCollectionEquality().hash(errorMessage));
 
   @JsonKey(ignore: true)
@@ -189,16 +236,22 @@ class _$_AuthState implements _AuthState {
 abstract class _AuthState implements AuthState {
   const factory _AuthState(
       {required bool isLoading,
+      required String userName,
       required String email,
       required String password,
+      required bool isLoginPage,
       String? errorMessage}) = _$_AuthState;
 
   @override
   bool get isLoading;
   @override
+  String get userName;
+  @override
   String get email;
   @override
   String get password;
+  @override
+  bool get isLoginPage;
   @override
   String? get errorMessage;
   @override

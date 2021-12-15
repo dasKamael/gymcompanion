@@ -1,8 +1,14 @@
 import 'dart:async';
+import 'dart:developer';
+import 'package:another_flushbar/flushbar.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gymcompanion/constants/colors.dart';
 import 'package:gymcompanion/providers/providers.dart';
+import 'package:gymcompanion/providers/user/user_provider.dart';
 import 'package:gymcompanion/screens/auth/auth_state.dart';
 import 'package:gymcompanion/services/auth/auth_repository_impl.dart';
+import 'package:path/path.dart';
 
 final authControllerProvider = StateNotifierProvider.autoDispose<AuthController, AuthState>((ref) {
   return AuthController(ref.read);
@@ -13,8 +19,10 @@ class AuthController extends StateNotifier<AuthState> {
       : super(
           AuthState(
             isLoading: false,
+            userName: '',
             email: '',
             password: '',
+            isLoginPage: true,
           ),
         );
 
@@ -30,11 +38,16 @@ class AuthController extends StateNotifier<AuthState> {
   void changePassword(String password) {
     state = state.copyWith(
       password: password,
-      errorMessage: null,
     );
   }
 
-  Future<void> signInWithEmailAndPassword() async {
+  void changeUserName(String userName) => state = state.copyWith(userName: userName);
+
+  void switchToRegisterPage() => state = state.copyWith(isLoginPage: false);
+
+  void switchToLoginPage() => state = state.copyWith(isLoginPage: true);
+
+  Future<void> signInWithEmailAndPassword(BuildContext context) async {
     state = state.copyWith(isLoading: true);
 
     await _read(authServiceProvider)
@@ -46,6 +59,14 @@ class AuthController extends StateNotifier<AuthState> {
       state = state.copyWith(
         isLoading: false,
       );
+
+      Flushbar(
+        icon: Icon(Icons.error_outline, color: ConstColors.error),
+        message: 'Email oder Passwort Falsch',
+        backgroundColor: ConstColors.buttonColor,
+        messageColor: ConstColors.error,
+        duration: Duration(seconds: 3),
+      ).show(context);
     });
   }
 
@@ -56,6 +77,22 @@ class AuthController extends StateNotifier<AuthState> {
       state = state.copyWith(isLoading: false);
       await _read(routeProvider).pushNamed('/mainnavigation');
     }).catchError((error) {
+      state = state.copyWith(
+        isLoading: false,
+      );
+    });
+  }
+
+  Future<void> createUserWithEmailAndPassword(BuildContext context) async {
+    state = state.copyWith(isLoading: true);
+
+    await _read(authServiceProvider)
+        .createUserWithEmailAndPassword(email: state.email, password: state.password)
+        .then((_) async {
+      await _read(userProvider.notifier).createUser(state.userName);
+      state = state.copyWith(isLoading: false);
+      await _read(routeProvider).pushNamed('/mainnavigation');
+    }).catchError((error) async {
       state = state.copyWith(
         isLoading: false,
       );

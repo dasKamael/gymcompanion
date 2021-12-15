@@ -8,8 +8,6 @@ class UserState with _$UserState {
     required int id,
     required String firebase_id,
     required String userName,
-    required int created_at,
-    required int last_login,
   }) = _UserState;
   factory UserState.fromJson(Map<String, dynamic> json) => _$UserStateFromJson(json);
 }
