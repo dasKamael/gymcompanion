@@ -7,8 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/colors.dart';
 import 'package:gymcompanion/constants/consts.dart';
 import 'package:gymcompanion/models/exercise.dart';
-import 'package:gymcompanion/models/plan.dart';
-import 'package:gymcompanion/providers/init_provider.dart';
 import 'package:gymcompanion/screens/plan/create_plan/create_plan_state.dart';
 
 final createPlanProvider =

@@ -1,19 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gymcompanion/providers/auth_provider.dart';
-import 'package:gymcompanion/providers/init_provider.dart';
+import 'package:gymcompanion/providers/providers.dart';
 import 'package:gymcompanion/services/auth/auth_repository.dart';
 
 import '../../routes.gr.dart';
 
-class AuthRepositoryImpl implements AuthRepository {
-  AuthRepositoryImpl(this._read);
+final authServiceProvider = Provider<AuthServiceImpl>(
+  (ref) => AuthServiceImpl(ref.read),
+);
+
+class AuthServiceImpl implements AuthService {
+  AuthServiceImpl(this._read);
 
   final Reader _read;
 
   @override
   Future<String> getToken() async {
-    return FirebaseAuth.instance.currentUser!.getIdToken();
+    return _read(firebaseAuthProvider).currentUser!.getIdToken();
   }
 
   @override
@@ -33,9 +36,22 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<void> createUserWithEmailAndPassword(
+      {required String email, required String password}) async {
+    await _read(firebaseAuthProvider)
+        .createUserWithEmailAndPassword(email: email, password: password);
+  }
+
+  @override
   Future<void> signOut() async {
     await _read(firebaseAuthProvider).signOut();
     _read(routeProvider).popUntilRouteWithName('/');
     await _read(routeProvider).push(AuthRoute());
+  }
+
+  @override
+  Future<bool> isAuthenticated() async {
+    final User? firebaseUser = FirebaseAuth.instance.currentUser;
+    return firebaseUser != null;
   }
 }

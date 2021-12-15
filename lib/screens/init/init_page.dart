@@ -17,16 +17,6 @@ class InitPage extends ConsumerWidget {
           children: [
             Text('GYM-COMPANION', style: ConstTextStyles.header1),
             if (state.isLoading) CircularProgressIndicator(color: ConstColors.secondaryColor),
-            // Align(
-            //   alignment: Alignment.bottomCenter,
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(bottom: ConstValues.defaultButtonHeight),
-            //     child: DefaultButton(
-            //       text: 'GO TO LOGIN',
-            //       onClick: () {},
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gymcompanion/constants/text_theme_dark.dart';
-import 'package:gymcompanion/providers/init_provider.dart';
+import 'package:gymcompanion/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class App extends ConsumerWidget {

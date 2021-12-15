@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/colors.dart';
 import 'package:gymcompanion/constants/text_styles.dart';
-import 'package:gymcompanion/providers/auth_provider.dart';
+import 'package:gymcompanion/services/auth/auth_repository_impl.dart';
 
 class Homepage extends ConsumerWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class Homepage extends ConsumerWidget {
       child: Center(
         child: GestureDetector(
           onTap: () {
-            ref.read(authRepositoryProvider).signOut();
+            ref.read(authServiceProvider).signOut();
           },
           child: Text(
             'HOMEPAGE',
