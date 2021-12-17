@@ -12,12 +12,15 @@ _$_Plan _$$_PlanFromJson(Map<String, dynamic> json) => _$_Plan(
       exercises: (json['exercises'] as List<dynamic>)
           .map((e) => Exercise.fromJson(e as Map<String, dynamic>))
           .toList(),
-      createdTimeStamp: json['createdTimeStamp'] as int,
+      lastTrained: (json['lastTrained'] as List<dynamic>)
+          .map((e) => DateTime.parse(e as String))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_PlanToJson(_$_Plan instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'exercises': instance.exercises,
-      'createdTimeStamp': instance.createdTimeStamp,
+      'lastTrained':
+          instance.lastTrained.map((e) => e.toIso8601String()).toList(),
     };

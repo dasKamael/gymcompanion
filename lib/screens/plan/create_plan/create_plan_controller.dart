@@ -7,6 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/colors.dart';
 import 'package:gymcompanion/constants/consts.dart';
 import 'package:gymcompanion/models/exercise.dart';
+import 'package:gymcompanion/models/plan.dart';
+import 'package:gymcompanion/providers/plan/plan_provider.dart';
 import 'package:gymcompanion/providers/user/user_provider.dart';
 import 'package:gymcompanion/screens/plan/create_plan/create_plan_state.dart';
 
@@ -91,6 +93,12 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
           duration: Duration(seconds: 3),
         ).show(context);
       } else {
+        _read(planProvider.notifier).addPlan(Plan(
+          id: 4,
+          name: state.name,
+          exercises: state.selectedExercises,
+          lastTrained: [],
+        ));
         Navigator.pop(context);
         await Flushbar(
           icon: Icon(Icons.check_circle_outline, color: ConstColors.secondaryColor),

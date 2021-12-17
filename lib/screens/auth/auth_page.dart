@@ -17,13 +17,15 @@ class AuthPage extends ConsumerWidget {
       backgroundColor: ConstColors.primaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: ConstValues.defaultSidePadding),
-        child: Stack(
+        child: Column(
           children: [
             DefaultAppBar(title: state.isLoginPage ? 'LOGIN' : 'REGISTER'),
             if (state.isLoading)
-              Center(child: CircularProgressIndicator(color: ConstColors.secondaryColor))
+              Expanded(
+                  child:
+                      Center(child: CircularProgressIndicator(color: ConstColors.secondaryColor)))
             else
-              state.isLoginPage ? LoginComponent() : RegisterComponent(),
+              Expanded(child: state.isLoginPage ? LoginComponent() : RegisterComponent()),
           ],
         ),
       ),

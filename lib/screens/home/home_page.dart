@@ -12,14 +12,9 @@ class Homepage extends ConsumerWidget {
     return Container(
       color: ConstColors.primaryColor,
       child: Center(
-        child: GestureDetector(
-          onTap: () {
-            ref.read(authServiceProvider).signOut();
-          },
-          child: Text(
-            'HOMEPAGE',
-            style: ConstTextStyles.header1,
-          ),
+        child: Text(
+          'HOMEPAGE',
+          style: ConstTextStyles.header1,
         ),
       ),
     );

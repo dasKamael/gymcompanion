@@ -11,10 +11,10 @@ class MainNavigationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
       backgroundColor: ConstColors.secondaryColor,
-      routes: const [HomeRouter(), DashBoardRouter(), PlansRouter(), ProfileRouter()],
+      routes: const [HomeRouter(), TrainingsRouter(), PlansRouter(), ProfileRouter()],
       bottomNavigationBuilder: (_, tabsRouter) {
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(0.0),
           child: SalomonBottomBar(
             selectedItemColor: ConstColors.primaryColor,
             unselectedItemColor: ConstColors.unselected,
@@ -27,7 +27,8 @@ class MainNavigationPage extends StatelessWidget {
             },
             items: [
               SalomonBottomBarItem(icon: const Icon(Icons.home), title: const Text('Home')),
-              SalomonBottomBarItem(icon: const Icon(Icons.dashboard), title: const Text('Dashboard')),
+              SalomonBottomBarItem(
+                  icon: const Icon(Icons.dashboard), title: const Text('Dashboard')),
               SalomonBottomBarItem(icon: const Icon(Icons.note), title: const Text('Plan')),
               SalomonBottomBarItem(icon: const Icon(Icons.person), title: const Text('Profile')),
             ],

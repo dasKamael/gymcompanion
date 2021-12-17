@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:gymcompanion/providers/plan/plan_provider.dart';
 import 'package:gymcompanion/providers/providers.dart';
 import 'package:gymcompanion/providers/user/user_provider.dart';
 import 'package:gymcompanion/routes.gr.dart';
@@ -19,10 +20,12 @@ class InitPageController extends StateNotifier<InitPageState> {
 
   Future<void> initializeApp() async {
     state = state.copyWith(isLoading: true);
+
     // Check if user is already Logged in on device
     if (await _read(authServiceProvider).isAuthenticated()) {
       log('USER IS AUTHENTICATED');
       await _read(userProvider.notifier).getUser();
+      await _read(planProvider.notifier).getUserPlans();
       state = state.copyWith(isLoading: false);
       await _read(routeProvider).popAndPush(MainNavigationRoute());
     } else {

@@ -16,8 +16,20 @@ class ConstTextStyles {
   );
 
   // Subtle
+  static final subtle12 = TextStyle(
+    fontSize: 12.0,
+    color: ConstColors.textFieldColor,
+    fontFamily: headerFont.fontFamily,
+  );
+
   static final subtle16 = TextStyle(
     fontSize: 16.0,
+    color: ConstColors.textFieldColor,
+    fontFamily: headerFont.fontFamily,
+  );
+
+  static final subtle20 = TextStyle(
+    fontSize: 20.0,
     color: ConstColors.textFieldColor,
     fontFamily: headerFont.fontFamily,
   );

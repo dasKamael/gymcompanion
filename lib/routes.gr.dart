@@ -12,13 +12,13 @@ import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:flutter/material.dart' as _i10;
 
 import 'screens/auth/auth_page.dart' as _i2;
-import 'screens/dashboard/dashboar_page.dart' as _i6;
 import 'screens/home/home_page.dart' as _i5;
 import 'screens/init/init_page.dart' as _i1;
 import 'screens/main_navigation_page.dart' as _i3;
 import 'screens/plan/create_plan/create_plan_page.dart' as _i8;
 import 'screens/plan/plan_page.dart' as _i7;
 import 'screens/profile/profile_page.dart' as _i9;
+import 'screens/training/training_page.dart' as _i6;
 
 class AppRouter extends _i4.RootStackRouter {
   AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
@@ -42,7 +42,7 @@ class AppRouter extends _i4.RootStackRouter {
       return _i4.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.EmptyRouterPage());
     },
-    DashBoardRouter.name: (routeData) {
+    TrainingsRouter.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.EmptyRouterPage());
     },
@@ -58,9 +58,9 @@ class AppRouter extends _i4.RootStackRouter {
       return _i4.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i5.Homepage());
     },
-    DashBoardRoute.name: (routeData) {
+    TrainingRoute.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i6.DashBoardPage());
+          routeData: routeData, child: const _i6.TrainingPage());
     },
     Planpage.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
@@ -92,12 +92,12 @@ class AppRouter extends _i4.RootStackRouter {
                     _i4.RouteConfig(Homepage.name,
                         path: '', parent: HomeRouter.name)
                   ]),
-              _i4.RouteConfig(DashBoardRouter.name,
-                  path: 'dashBoard',
+              _i4.RouteConfig(TrainingsRouter.name,
+                  path: 'training',
                   parent: MainNavigationRoute.name,
                   children: [
-                    _i4.RouteConfig(DashBoardRoute.name,
-                        path: '', parent: DashBoardRouter.name)
+                    _i4.RouteConfig(TrainingRoute.name,
+                        path: '', parent: TrainingsRouter.name)
                   ]),
               _i4.RouteConfig(PlansRouter.name,
                   path: 'plans',
@@ -150,11 +150,11 @@ class HomeRouter extends _i4.PageRouteInfo<void> {
 }
 
 /// generated route for [_i4.EmptyRouterPage]
-class DashBoardRouter extends _i4.PageRouteInfo<void> {
-  const DashBoardRouter({List<_i4.PageRouteInfo>? children})
-      : super(name, path: 'dashBoard', initialChildren: children);
+class TrainingsRouter extends _i4.PageRouteInfo<void> {
+  const TrainingsRouter({List<_i4.PageRouteInfo>? children})
+      : super(name, path: 'training', initialChildren: children);
 
-  static const String name = 'DashBoardRouter';
+  static const String name = 'TrainingsRouter';
 }
 
 /// generated route for [_i4.EmptyRouterPage]
@@ -180,11 +180,11 @@ class Homepage extends _i4.PageRouteInfo<void> {
   static const String name = 'Homepage';
 }
 
-/// generated route for [_i6.DashBoardPage]
-class DashBoardRoute extends _i4.PageRouteInfo<void> {
-  const DashBoardRoute() : super(name, path: '');
+/// generated route for [_i6.TrainingPage]
+class TrainingRoute extends _i4.PageRouteInfo<void> {
+  const TrainingRoute() : super(name, path: '');
 
-  static const String name = 'DashBoardRoute';
+  static const String name = 'TrainingRoute';
 }
 
 /// generated route for [_i7.Planpage]

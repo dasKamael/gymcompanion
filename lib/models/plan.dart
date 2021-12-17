@@ -9,7 +9,7 @@ class Plan with _$Plan {
     required int id,
     required String name,
     required List<Exercise> exercises,
-    required int createdTimeStamp,
+    required List<DateTime> lastTrained,
   }) = _Plan;
   factory Plan.fromJson(Map<String, dynamic> json) => _$PlanFromJson(json);
 }
