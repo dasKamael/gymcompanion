@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/components/default_appbar.dart';
+import 'package:gymcompanion/components/default_button.dart';
 import 'package:gymcompanion/constants/colors.dart';
 import 'package:gymcompanion/constants/consts.dart';
 import 'package:gymcompanion/constants/text_styles.dart';

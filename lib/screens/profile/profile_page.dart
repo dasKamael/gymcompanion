@@ -23,14 +23,12 @@ class ProfilePage extends ConsumerWidget {
             title: state.userName,
             actions: [Icon(Icons.settings)],
           ),
-          Expanded(
-            child: Center(
-              child: DefaultButton(
-                text: 'LOG-OUT',
-                onClick: () => ref.read(authServiceProvider).signOut(),
-              ),
-            ),
+          Spacer(),
+          DefaultButton(
+            text: 'LOG-OUT',
+            onClick: () => ref.read(authServiceProvider).signOut(),
           ),
+          SizedBox(height: 16.0),
         ],
       ),
     );

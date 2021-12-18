@@ -35,6 +35,7 @@ dependencies:
   google_fonts: ^2.1.0
   dropdown_search: ^2.0.1
   another_flushbar: ^1.10.28
+  appinio_swiper: ^1.0.2
   
   
 
