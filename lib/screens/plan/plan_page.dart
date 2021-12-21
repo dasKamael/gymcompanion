@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/components/default_appbar.dart';
-import 'package:gymcompanion/components/default_button.dart';
 import 'package:gymcompanion/constants/colors.dart';
 import 'package:gymcompanion/constants/consts.dart';
 import 'package:gymcompanion/constants/text_styles.dart';
@@ -85,12 +84,22 @@ class Planpage extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text('GEWICHT', style: ConstTextStyles.subtle12),
-                                  for (Exercise e in p.exercises)
-                                    Text('130', style: ConstTextStyles.subtle20)
+                                  for (Exercise p in p.exercises)
+                                    Text('130 KG', style: ConstTextStyles.subtle20)
                                 ],
                               ),
                             ],
                           ),
+                          SizedBox(height: 16.0),
+                          Center(
+                            child: InkWell(
+                              onTap: () {},
+                              child: Text(
+                                'DETAILS',
+                                style: ConstTextStyles.header1.copyWith(fontSize: 18),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),

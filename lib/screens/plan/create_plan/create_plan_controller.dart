@@ -9,16 +9,20 @@ import 'package:gymcompanion/constants/consts.dart';
 import 'package:gymcompanion/models/exercise.dart';
 import 'package:gymcompanion/models/plan.dart';
 import 'package:gymcompanion/providers/plan/plan_provider.dart';
+import 'package:gymcompanion/providers/providers.dart';
 import 'package:gymcompanion/providers/user/user_provider.dart';
 import 'package:gymcompanion/screens/plan/create_plan/create_plan_state.dart';
 
 final createPlanProvider =
     StateNotifierProvider.autoDispose<CreatePlanController, CreatePlanState>((ref) {
-  return CreatePlanController(ref.read);
+  return CreatePlanController(
+    ref.read,
+    () => ref.read(dioProvider.future),
+  );
 });
 
 class CreatePlanController extends StateNotifier<CreatePlanState> {
-  CreatePlanController(this._read)
+  CreatePlanController(this._read, this.dioProvider)
       : super(CreatePlanState(
           exercises: [],
           selectedExercises: [],
@@ -27,6 +31,7 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
   }
 
   Reader _read;
+  Future<Dio> Function() dioProvider;
 
   void initCreatePlanPage() {
     // Get available Exercises
@@ -34,10 +39,9 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
   }
 
   Future<void> getExercises() async {
-    final dio = Dio();
-    final url = '${ConstValues.url}/exercise';
+    final dio = await dioProvider();
 
-    Response response = await dio.get(url);
+    final Response response = await dio.get('/exercise');
     for (final data in response.data['result']) {
       log(data.toString());
       state.exercises.add(Exercise.fromJson(data));

@@ -1,15 +1,22 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/models/exercise.dart';
 import 'package:gymcompanion/models/plan.dart';
 import 'package:gymcompanion/providers/plan/plan_state.dart';
+import 'package:gymcompanion/providers/providers.dart';
 
 final planProvider = StateNotifierProvider<PlanStateProvider, PlanState>(
-  (ref) => PlanStateProvider(ref.read),
+  (ref) => PlanStateProvider(
+    ref.read,
+    () => ref.read(dioProvider.future),
+  ),
 );
 
 class PlanStateProvider extends StateNotifier<PlanState> {
-  PlanStateProvider(this._read)
-      : super(PlanState(plans: [
+  PlanStateProvider(
+    this._read,
+    this.dioProvider,
+  ) : super(PlanState(plans: [
           Plan(
             id: 1,
             name: 'Brust Trizeps',
@@ -35,8 +42,11 @@ class PlanStateProvider extends StateNotifier<PlanState> {
         ]));
 
   final Reader _read;
+  final Future<Dio> Function() dioProvider;
 
-  Future<void> getUserPlans() async {}
+  Future<void> getUserPlans() async {
+    final dio = await dioProvider();
+  }
 
   void addPlan(Plan plan) {
     state.plans.add(plan);

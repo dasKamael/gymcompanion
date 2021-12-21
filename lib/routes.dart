@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:gymcompanion/screens/auth/auth_page.dart';
-import 'package:gymcompanion/screens/dashboard/dashboar_page.dart';
 import 'package:gymcompanion/screens/home/home_page.dart';
 import 'package:gymcompanion/screens/init/init_page.dart';
 import 'package:gymcompanion/screens/main_navigation_page.dart';

@@ -45,6 +45,7 @@ class CreatePlanPage extends ConsumerWidget {
                       ),
                       SizedBox(height: 32.0),
                       DropdownSearch<Exercise>.multiSelection(
+                        
                         mode: Mode.BOTTOM_SHEET,
                         showSearchBox: true,
                         selectedItems: state.selectedExercises,
