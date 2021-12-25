@@ -6,9 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/components/default_appbar.dart';
 import 'package:gymcompanion/components/default_button.dart';
-import 'package:gymcompanion/constants/colors.dart';
-import 'package:gymcompanion/constants/consts.dart';
-import 'package:gymcompanion/constants/text_styles.dart';
+import 'package:gymcompanion/constants/constants.dart';
 import 'package:gymcompanion/models/exercise.dart';
 import 'package:gymcompanion/screens/plan/create_plan/create_plan_controller.dart';
 
@@ -21,6 +19,7 @@ class CreatePlanPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(createPlanProvider);
+    final stateNotifier = ref.watch(createPlanProvider.notifier);
     return Container(
       color: ConstColors.primaryColor,
       child: Padding(
@@ -40,12 +39,10 @@ class CreatePlanPage extends ConsumerWidget {
                         name: 'name',
                         style: ConstTextStyles.textField,
                         decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'NAME'),
-                        onChanged: (value) =>
-                            ref.read(createPlanProvider.notifier).setPlanName(value!),
+                        onChanged: (value) => stateNotifier.setPlanName(value!),
                       ),
                       SizedBox(height: 32.0),
                       DropdownSearch<Exercise>.multiSelection(
-                        
                         mode: Mode.BOTTOM_SHEET,
                         showSearchBox: true,
                         selectedItems: state.selectedExercises,
@@ -60,9 +57,9 @@ class CreatePlanPage extends ConsumerWidget {
                         dropdownSearchBaseStyle: ConstTextStyles.textField,
                         dropdownSearchDecoration: ConstTextStyles.defaultInput,
                         popupOnItemAdded: (selectedItems, item) =>
-                            ref.read(createPlanProvider.notifier).addExerciseToList(item),
+                            stateNotifier.addExerciseToList(item),
                         popupOnItemRemoved: (selectedItems, item) =>
-                            ref.read(createPlanProvider.notifier).removeExerciseFromList(item),
+                            stateNotifier.removeExerciseFromList(item),
                       ),
                     ],
                   ),
@@ -109,7 +106,7 @@ class CreatePlanPage extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: DefaultButton(
                     text: 'CREATE',
-                    onClick: () => ref.read(createPlanProvider.notifier).createPlan(context),
+                    onClick: () => stateNotifier.createPlan(context),
                   ),
                 )
               ],

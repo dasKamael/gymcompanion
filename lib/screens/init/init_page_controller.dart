@@ -6,10 +6,11 @@ import 'package:gymcompanion/providers/user/user_provider.dart';
 import 'package:gymcompanion/routes.gr.dart';
 import 'package:gymcompanion/screens/init/init_page_state.dart';
 import 'package:gymcompanion/services/auth/auth_repository_impl.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final initPageProvider =
-    StateNotifierProvider<InitPageController, InitPageState>((ref) => InitPageController(ref.read));
+final initPageProvider = StateNotifierProvider<InitPageController, InitPageState>(
+  (ref) => InitPageController(ref.read),
+);
 
 class InitPageController extends StateNotifier<InitPageState> {
   InitPageController(this._read) : super(InitPageState(isLoading: false)) {

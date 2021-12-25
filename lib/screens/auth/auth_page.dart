@@ -3,9 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/components/default_appbar.dart';
 import 'package:gymcompanion/components/default_button.dart';
-import 'package:gymcompanion/constants/colors.dart';
-import 'package:gymcompanion/constants/consts.dart';
-import 'package:gymcompanion/constants/text_styles.dart';
+import 'package:gymcompanion/constants/constants.dart';
 import 'package:gymcompanion/screens/auth/auth_controller.dart';
 
 class AuthPage extends ConsumerWidget {
@@ -38,7 +36,7 @@ class LoginComponent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final stateNotifier = ref.read(authControllerProvider.notifier);
+    final stateNotifier = ref.watch(authControllerProvider.notifier);
     return Align(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +86,7 @@ class RegisterComponent extends ConsumerWidget {
   const RegisterComponent({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final stateNotifier = ref.read(authControllerProvider.notifier);
+    final state = ref.watch(authControllerProvider.notifier);
     return Align(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -102,8 +100,7 @@ class RegisterComponent extends ConsumerWidget {
                   style: ConstTextStyles.textField,
                   keyboardType: TextInputType.emailAddress,
                   decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'USERNAME'),
-                  onChanged: (value) =>
-                      ref.read(authControllerProvider.notifier).changeUserName(value!),
+                  onChanged: (value) => state.changeUserName(value!),
                 ),
                 SizedBox(height: ConstValues.defaultSidePadding),
                 FormBuilderTextField(
@@ -111,8 +108,7 @@ class RegisterComponent extends ConsumerWidget {
                   style: ConstTextStyles.textField,
                   keyboardType: TextInputType.emailAddress,
                   decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'EMAIL'),
-                  onChanged: (value) =>
-                      ref.read(authControllerProvider.notifier).changeEmail(value!),
+                  onChanged: (value) => state.changeEmail(value!),
                 ),
                 SizedBox(height: ConstValues.defaultSidePadding),
                 FormBuilderTextField(
@@ -120,8 +116,7 @@ class RegisterComponent extends ConsumerWidget {
                   obscureText: true,
                   keyboardType: TextInputType.emailAddress,
                   decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'PASSWORD'),
-                  onChanged: (value) =>
-                      ref.read(authControllerProvider.notifier).changePassword(value!),
+                  onChanged: (value) => state.changePassword(value!),
                 ),
                 SizedBox(height: ConstValues.defaultSidePadding),
                 FormBuilderTextField(
@@ -129,18 +124,15 @@ class RegisterComponent extends ConsumerWidget {
                   obscureText: true,
                   keyboardType: TextInputType.emailAddress,
                   decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'REPEAT PASSWORD'),
-                  onChanged: (value) =>
-                      ref.read(authControllerProvider.notifier).changePassword(value!),
+                  onChanged: (value) => state.changePassword(value!),
                 ),
                 SizedBox(height: ConstValues.defaultSidePadding),
                 DefaultButton(
-                  onClick: () => ref
-                      .read(authControllerProvider.notifier)
-                      .createUserWithEmailAndPassword(context),
+                  onClick: () => state.createUserWithEmailAndPassword(context),
                   text: 'REGISTER',
                 ),
                 TextButton(
-                  onPressed: () => stateNotifier.switchToLoginPage(),
+                  onPressed: () => state.switchToLoginPage(),
                   child: Text('BACK TO LOGIN', style: ConstTextStyles.subtle16),
                 ),
               ],

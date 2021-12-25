@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/components/default_appbar.dart';
 import 'package:gymcompanion/components/default_button.dart';
-import 'package:gymcompanion/constants/colors.dart';
-import 'package:gymcompanion/constants/consts.dart';
-import 'package:gymcompanion/constants/text_styles.dart';
+import 'package:gymcompanion/constants/constants.dart';
 import 'package:gymcompanion/providers/plan/plan_provider.dart';
 
 class TrainingPage extends ConsumerWidget {
