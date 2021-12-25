@@ -15,8 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   auto_route: ^3.1.3
   dio: ^4.0.4
-  firebase_core: ^1.10.5
-  firebase_auth: ^3.3.3
+
   freezed_annotation: ^1.0.0
   shared_preferences: ^2.0.11
   flutter_app_name: ^0.1.1
@@ -26,8 +25,6 @@ dependencies:
   path: ^1.8.0
   cached_network_image: ^3.2.0
   shimmer: ^2.0.0
-  # path_provider: ^2.0.8
-  # permission_handler: ^8.3.0
   flutter_riverpod: ^1.0.2
   json_annotation: ^4.4.0
   salomon_bottom_bar: ^3.2.0
@@ -35,6 +32,9 @@ dependencies:
   dropdown_search: ^2.0.1
   another_flushbar: ^1.10.28
   appinio_swiper: ^1.0.2
+  cloud_firestore: ^3.1.5
+  firebase_core: ^1.10.6
+  firebase_auth: ^3.3.4
   
   
 

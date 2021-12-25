@@ -13,7 +13,11 @@ final initPageProvider = StateNotifierProvider<InitPageController, InitPageState
 );
 
 class InitPageController extends StateNotifier<InitPageState> {
-  InitPageController(this._read) : super(InitPageState(isLoading: false)) {
+  InitPageController(
+    this._read,
+  ) : super(
+          InitPageState(isLoading: false),
+        ) {
     initializeApp();
   }
 
@@ -24,13 +28,11 @@ class InitPageController extends StateNotifier<InitPageState> {
 
     // Check if user is already Logged in on device
     if (await _read(authServiceProvider).isAuthenticated()) {
-      log('USER IS AUTHENTICATED');
-      await _read(userProvider.notifier).getUser();
-      await _read(planProvider.notifier).getUserPlans();
+      //await _read(userProvider.notifier).getUser();
+      // await _read(planProvider.notifier).getUserPlans();
       state = state.copyWith(isLoading: false);
       await _read(routeProvider).popAndPush(MainNavigationRoute());
     } else {
-      log('USER IS NOT AUTHENTICATED');
       state = state.copyWith(isLoading: false);
       await _read(routeProvider).popAndPush(AuthRoute());
     }

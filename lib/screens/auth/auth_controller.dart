@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:another_flushbar/flushbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/colors.dart';
@@ -86,8 +87,9 @@ class AuthController extends StateNotifier<AuthState> {
 
     await _read(authServiceProvider)
         .createUserWithEmailAndPassword(email: state.email, password: state.password)
-        .then((_) async {
-      await _read(userProvider.notifier).createUser(state.userName);
+        .then((UserCredential userCredential) async {
+      await _read(userProvider.notifier)
+          .createUser(userId: userCredential.user!.uid, userName: state.userName);
       state = state.copyWith(isLoading: false);
       await _read(routeProvider).pushNamed('/mainnavigation');
     }).catchError((error) async {

@@ -36,9 +36,9 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<void> createUserWithEmailAndPassword(
+  Future<UserCredential> createUserWithEmailAndPassword(
       {required String email, required String password}) async {
-    await _read(firebaseAuthProvider)
+    return await _read(firebaseAuthProvider)
         .createUserWithEmailAndPassword(email: email, password: password);
   }
 

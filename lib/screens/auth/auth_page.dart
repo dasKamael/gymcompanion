@@ -65,10 +65,10 @@ class LoginComponent extends ConsumerWidget {
                   onClick: () => stateNotifier.signInWithEmailAndPassword(context),
                   text: 'LOGIN',
                 ),
-                TextButton(
-                  onPressed: () => stateNotifier.signInAnonymously(),
-                  child: Text('LOGIN ANONYMOUS', style: ConstTextStyles.subtle16),
-                ),
+                // TextButton(
+                //   onPressed: () => stateNotifier.signInAnonymously(),
+                //   child: Text('LOGIN ANONYMOUS', style: ConstTextStyles.subtle16),
+                // ),
                 TextButton(
                   onPressed: () => stateNotifier.switchToRegisterPage(),
                   child: Text('REGISTER', style: ConstTextStyles.subtle16),
