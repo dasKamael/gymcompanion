@@ -91,19 +91,6 @@ class AuthController extends StateNotifier<AuthState> {
     });
   }
 
-  // Future<void> signInAnonymously() async {
-  //   state = state.copyWith(isLoading: true);
-
-  //   await _read(authServiceProvider).signInAnonymously().then((_) async {
-  //     state = state.copyWith(isLoading: false);
-  //     await _read(routeProvider).pushNamed('/mainnavigation');
-  //   }).catchError((error) {
-  //     state = state.copyWith(
-  //       isLoading: false,
-  //     );
-  //   });
-  // }
-
   Future<void> createUserWithEmailAndPassword(BuildContext context) async {
     state = state.copyWith(isLoading: true);
 
@@ -120,6 +107,12 @@ class AuthController extends StateNotifier<AuthState> {
       );
       state = state.copyWith(isLoading: false);
       await _read(routeProvider).pushNamed('/mainnavigation');
+    } on FirebaseAuthException catch (e) {
+      print('Failed with error code: ${e.code}');
+      print(e.message);
+      state = state.copyWith(
+        isLoading: false,
+      );
     } catch (e) {
       state = state.copyWith(
         isLoading: false,

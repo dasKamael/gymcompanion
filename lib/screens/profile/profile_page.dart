@@ -17,6 +17,7 @@ class ProfilePage extends ConsumerWidget {
       color: ConstColors.primaryColor,
       padding: EdgeInsets.symmetric(horizontal: ConstValues.defaultSidePadding),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DefaultAppBar(
             title: state.userName,

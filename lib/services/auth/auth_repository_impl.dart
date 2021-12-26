@@ -32,7 +32,13 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<void> signInWithEmailAndPassword({required String email, required String password}) async {
-    await _read(firebaseAuthProvider).signInWithEmailAndPassword(email: email, password: password);
+    try {
+      await _read(firebaseAuthProvider)
+          .signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      print('Failed with error code: ${e.code}');
+      print(e.message);
+    }
   }
 
   @override

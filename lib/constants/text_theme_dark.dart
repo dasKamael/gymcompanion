@@ -7,6 +7,8 @@ class ConstDarkTheme {
     primaryColorLight: ConstColors.primaryColor,
     errorColor: ConstColors.error,
     canvasColor: ConstColors.primaryColor,
-    textTheme: TextTheme(subtitle1: TextStyle(color: ConstColors.secondaryColor)),
+    textTheme: TextTheme(
+      bodyText2: TextStyle(color: ConstColors.textColor),
+    ),
   );
 }
