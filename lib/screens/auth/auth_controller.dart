@@ -22,6 +22,9 @@ class AuthController extends StateNotifier<AuthState> {
             email: '',
             password: '',
             isLoginPage: true,
+            height: 0,
+            weight: 0,
+            birthdate: DateTime.now(),
           ),
         );
 
@@ -40,6 +43,24 @@ class AuthController extends StateNotifier<AuthState> {
     );
   }
 
+  void changeWeight(String weight) {
+    state = state.copyWith(
+      weight: int.parse(weight),
+    );
+  }
+
+  void changeHeight(String height) {
+    state = state.copyWith(
+      height: int.parse(height),
+    );
+  }
+
+  void changeBirthdate(DateTime birthdate) {
+    state = state.copyWith(
+      birthdate: birthdate,
+    );
+  }
+
   void changeUserName(String userName) => state = state.copyWith(userName: userName);
 
   void switchToRegisterPage() => state = state.copyWith(isLoginPage: false);
@@ -52,6 +73,7 @@ class AuthController extends StateNotifier<AuthState> {
     await _read(authServiceProvider)
         .signInWithEmailAndPassword(email: state.email, password: state.password)
         .then((_) async {
+      await _read(userProvider.notifier).getUser();
       state = state.copyWith(isLoading: false);
       await _read(routeProvider).pushNamed('/mainnavigation');
     }).catchError((error) {
@@ -69,33 +91,39 @@ class AuthController extends StateNotifier<AuthState> {
     });
   }
 
-  Future<void> signInAnonymously() async {
-    state = state.copyWith(isLoading: true);
+  // Future<void> signInAnonymously() async {
+  //   state = state.copyWith(isLoading: true);
 
-    await _read(authServiceProvider).signInAnonymously().then((_) async {
-      state = state.copyWith(isLoading: false);
-      await _read(routeProvider).pushNamed('/mainnavigation');
-    }).catchError((error) {
-      state = state.copyWith(
-        isLoading: false,
-      );
-    });
-  }
+  //   await _read(authServiceProvider).signInAnonymously().then((_) async {
+  //     state = state.copyWith(isLoading: false);
+  //     await _read(routeProvider).pushNamed('/mainnavigation');
+  //   }).catchError((error) {
+  //     state = state.copyWith(
+  //       isLoading: false,
+  //     );
+  //   });
+  // }
 
   Future<void> createUserWithEmailAndPassword(BuildContext context) async {
     state = state.copyWith(isLoading: true);
 
-    await _read(authServiceProvider)
-        .createUserWithEmailAndPassword(email: state.email, password: state.password)
-        .then((UserCredential userCredential) async {
-      await _read(userProvider.notifier)
-          .createUser(userId: userCredential.user!.uid, userName: state.userName);
+    try {
+      UserCredential userCredential = await _read(authServiceProvider)
+          .createUserWithEmailAndPassword(email: state.email, password: state.password);
+
+      await _read(userProvider.notifier).createUser(
+        userId: userCredential.user!.uid,
+        userName: state.userName,
+        weight: state.weight,
+        height: state.height,
+        birthdate: state.birthdate,
+      );
       state = state.copyWith(isLoading: false);
       await _read(routeProvider).pushNamed('/mainnavigation');
-    }).catchError((error) async {
+    } catch (e) {
       state = state.copyWith(
         isLoading: false,
       );
-    });
+    }
   }
 }

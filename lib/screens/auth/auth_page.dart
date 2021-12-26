@@ -114,7 +114,6 @@ class RegisterComponent extends ConsumerWidget {
                 FormBuilderTextField(
                   name: 'password',
                   obscureText: true,
-                  keyboardType: TextInputType.emailAddress,
                   decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'PASSWORD'),
                   onChanged: (value) => state.changePassword(value!),
                 ),
@@ -122,9 +121,39 @@ class RegisterComponent extends ConsumerWidget {
                 FormBuilderTextField(
                   name: 'repeatpassword',
                   obscureText: true,
-                  keyboardType: TextInputType.emailAddress,
                   decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'REPEAT PASSWORD'),
                   onChanged: (value) => state.changePassword(value!),
+                ),
+                SizedBox(height: ConstValues.defaultSidePadding),
+                Row(
+                  children: [
+                    Expanded(
+                      child: FormBuilderTextField(
+                        name: 'weight',
+                        keyboardType: TextInputType.number,
+                        decoration:
+                            ConstTextStyles.defaultInput.copyWith(labelText: 'Gewicht in KG'),
+                        onChanged: (value) => state.changeWeight(value!),
+                      ),
+                    ),
+                    SizedBox(width: ConstValues.defaultSidePadding),
+                    Expanded(
+                      child: FormBuilderTextField(
+                        name: 'height',
+                        keyboardType: TextInputType.number,
+                        decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'Größe in CM'),
+                        onChanged: (value) => state.changeHeight(value!),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: ConstValues.defaultSidePadding),
+                FormBuilderDateTimePicker(
+                  name: 'birthdate',
+                  decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'Geburtstag'),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime.now(),
+                  onChanged: (DateTime? date) => state.changeBirthdate(date!),
                 ),
                 SizedBox(height: ConstValues.defaultSidePadding),
                 DefaultButton(

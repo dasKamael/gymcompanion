@@ -12,7 +12,7 @@ class ProfilePage extends ConsumerWidget {
   const ProfilePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.read(userProvider);
+    final state = ref.watch(userProvider);
     return Container(
       color: ConstColors.primaryColor,
       padding: EdgeInsets.symmetric(horizontal: ConstValues.defaultSidePadding),
@@ -22,6 +22,11 @@ class ProfilePage extends ConsumerWidget {
             title: state.userName,
             actions: [Icon(Icons.settings)],
           ),
+          Text('Birthdate:' +
+              DateTime.fromMillisecondsSinceEpoch(state.birthdate.millisecondsSinceEpoch)
+                  .toString()),
+          Text('Height:' + state.height.toString()),
+          Text('Weight:' + state.weight.toString()),
           Spacer(),
           DefaultButton(
             text: 'LOG-OUT',
