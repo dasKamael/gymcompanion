@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "local",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define", "FLAVOR=dev",
+                "--dart-define", "BASE_URL=${config:base_url}",
+                "--dart-define", "POSTMAN_PROXY_ADDRESS=${config:postman_proxy_address}",
+                "--dart-define", "POSTMAN_PROXY=${config:postman_proxy}",
+            ]
+        },
+    ]
+}

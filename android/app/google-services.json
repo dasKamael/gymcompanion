@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "124484625901",
+    "project_id": "gym-companion-bb8ad",
+    "storage_bucket": "gym-companion-bb8ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124484625901:android:89ebd73929967e60d273e4",
+        "android_client_info": {
+          "package_name": "com.onepistudios.gymcompanion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124484625901-8ikbc5kvhusr643r8r8kklfmhuo8sq0s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQYO-4BSM8-qQtk4jRpU4pjsoFmCYG3mg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124484625901-8ikbc5kvhusr643r8r8kklfmhuo8sq0s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "124484625901-0t1nep66u2jishb0qcai52jbun1b8fjk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.onepistudios.gymcompanion"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
