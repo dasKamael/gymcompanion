@@ -4,3 +4,7 @@ class ConstValues {
   static const defaultTextFieldBorderRadius = 10.0;
   static const defaultButtonHeight = 48.0;
 }
+
+class FirestoreCollections {
+  static const String userCollection = 'Users';
+}

@@ -21,48 +21,60 @@ import 'screens/profile/profile_page.dart' as _i9;
 import 'screens/training/training_page.dart' as _i6;
 
 class AppRouter extends _i4.RootStackRouter {
-  AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey]) : super(navigatorKey);
+  AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
   final Map<String, _i4.PageFactory> pagesMap = {
     InitRoute.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i1.InitPage());
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.InitPage());
     },
     AuthRoute.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i2.AuthPage());
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i2.AuthPage());
     },
     MainNavigationRoute.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i3.MainNavigationPage());
     },
     HomeRouter.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i4.EmptyRouterPage());
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i4.EmptyRouterPage());
     },
     TrainingsRouter.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i4.EmptyRouterPage());
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i4.EmptyRouterPage());
     },
     PlansRouter.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i4.EmptyRouterPage());
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i4.EmptyRouterPage());
     },
     ProfileRouter.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i4.EmptyRouterPage());
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i4.EmptyRouterPage());
     },
     Homepage.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i5.Homepage());
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i5.Homepage());
     },
     TrainingRoute.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: _i6.TrainingPage());
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i6.TrainingPage());
     },
     Planpage.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i7.Planpage());
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i7.Planpage());
     },
     CreatePlanRoute.name: (routeData) {
-      final args = routeData.argsAs<CreatePlanRouteArgs>(orElse: () => const CreatePlanRouteArgs());
+      final args = routeData.argsAs<CreatePlanRouteArgs>(
+          orElse: () => const CreatePlanRouteArgs());
       return _i4.MaterialPageX<dynamic>(
           routeData: routeData, child: _i8.CreatePlanPage(key: args.key));
     },
     ProfileRoute.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i9.ProfilePage());
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i9.ProfilePage());
     }
   };
 
@@ -70,29 +82,40 @@ class AppRouter extends _i4.RootStackRouter {
   List<_i4.RouteConfig> get routes => [
         _i4.RouteConfig(InitRoute.name, path: '/'),
         _i4.RouteConfig(AuthRoute.name, path: '/auth'),
-        _i4.RouteConfig(MainNavigationRoute.name, path: '/mainnavigation', children: [
-          _i4.RouteConfig(HomeRouter.name,
-              path: 'home',
-              parent: MainNavigationRoute.name,
-              children: [_i4.RouteConfig(Homepage.name, path: '', parent: HomeRouter.name)]),
-          _i4.RouteConfig(TrainingsRouter.name,
-              path: 'training',
-              parent: MainNavigationRoute.name,
-              children: [
-                _i4.RouteConfig(TrainingRoute.name, path: '', parent: TrainingsRouter.name)
-              ]),
-          _i4.RouteConfig(PlansRouter.name,
-              path: 'plans',
-              parent: MainNavigationRoute.name,
-              children: [
-                _i4.RouteConfig(Planpage.name, path: '', parent: PlansRouter.name),
-                _i4.RouteConfig(CreatePlanRoute.name, path: 'createPlan', parent: PlansRouter.name)
-              ]),
-          _i4.RouteConfig(ProfileRouter.name,
-              path: 'profile',
-              parent: MainNavigationRoute.name,
-              children: [_i4.RouteConfig(ProfileRoute.name, path: '', parent: ProfileRouter.name)])
-        ])
+        _i4.RouteConfig(MainNavigationRoute.name,
+            path: '/mainnavigation',
+            children: [
+              _i4.RouteConfig(HomeRouter.name,
+                  path: 'home',
+                  parent: MainNavigationRoute.name,
+                  children: [
+                    _i4.RouteConfig(Homepage.name,
+                        path: '', parent: HomeRouter.name)
+                  ]),
+              _i4.RouteConfig(TrainingsRouter.name,
+                  path: 'training',
+                  parent: MainNavigationRoute.name,
+                  children: [
+                    _i4.RouteConfig(TrainingRoute.name,
+                        path: '', parent: TrainingsRouter.name)
+                  ]),
+              _i4.RouteConfig(PlansRouter.name,
+                  path: 'plans',
+                  parent: MainNavigationRoute.name,
+                  children: [
+                    _i4.RouteConfig(Planpage.name,
+                        path: '', parent: PlansRouter.name),
+                    _i4.RouteConfig(CreatePlanRoute.name,
+                        path: 'createPlan', parent: PlansRouter.name)
+                  ]),
+              _i4.RouteConfig(ProfileRouter.name,
+                  path: 'profile',
+                  parent: MainNavigationRoute.name,
+                  children: [
+                    _i4.RouteConfig(ProfileRoute.name,
+                        path: '', parent: ProfileRouter.name)
+                  ])
+            ])
       ];
 }
 

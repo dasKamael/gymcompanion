@@ -74,53 +74,53 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
   }
 
   Future<void> createPlan(BuildContext context) async {
-    if (state.selectedExercises.isNotEmpty) {
-      final dio = Dio();
-      final url = '${ConstValues.url}/plans/createPlan';
+    //if (state.selectedExercises.isNotEmpty) {
+    // final dio = Dio();
+    // final url = '${ConstValues.url}/plans/createPlan';
 
-      Map<String, dynamic> body = {'name': state.name, 'userId': _read(userProvider).id};
+    // Map<String, dynamic> body = {'name': state.name, 'userId': _read(userProvider).id};
 
-      List<int> exercises = [];
-      for (final exercise in state.selectedExercises) {
-        exercises.add(exercise.id);
-      }
-      body.addAll({'exercises': exercises});
+    // List<int> exercises = [];
+    // for (final exercise in state.selectedExercises) {
+    //   exercises.add(exercise.id);
+    // }
+    // body.addAll({'exercises': exercises});
 
-      Response response = await dio.post(url, queryParameters: body);
+    // Response response = await dio.post(url, queryParameters: body);
 
-      if (response.data['message'] == 'PLAN_ALREADY_EXISTS') {
-        await Flushbar(
-          icon: Icon(Icons.error_outline, color: ConstColors.error),
-          message: 'Plan name bereits vorhanden',
-          backgroundColor: ConstColors.buttonColor,
-          messageColor: ConstColors.error,
-          duration: Duration(seconds: 3),
-        ).show(context);
-      } else {
-        _read(planProvider.notifier).addPlan(Plan(
-          id: 4,
-          name: state.name,
-          exercises: state.selectedExercises,
-          lastTrained: [],
-        ));
-        Navigator.pop(context);
-        await Flushbar(
-          icon: Icon(Icons.check_circle_outline, color: ConstColors.secondaryColor),
-          message: 'Plan erfolgreich erstellt',
-          backgroundColor: ConstColors.buttonColor,
-          messageColor: ConstColors.secondaryColor,
-          duration: Duration(seconds: 3),
-        ).show(context);
-      }
-    } else {
-      await Flushbar(
-        icon: Icon(Icons.error_outline, color: ConstColors.warn),
-        message: 'Mindestens eine Übung hinzufügen',
-        backgroundColor: ConstColors.buttonColor,
-        messageColor: ConstColors.warn,
-        duration: Duration(seconds: 3),
-      ).show(context);
-    }
+    //   if (response.data['message'] == 'PLAN_ALREADY_EXISTS') {
+    //     await Flushbar(
+    //       icon: Icon(Icons.error_outline, color: ConstColors.error),
+    //       message: 'Plan name bereits vorhanden',
+    //       backgroundColor: ConstColors.buttonColor,
+    //       messageColor: ConstColors.error,
+    //       duration: Duration(seconds: 3),
+    //     ).show(context);
+    //   } else {
+    //     _read(planProvider.notifier).addPlan(Plan(
+    //       id: 4,
+    //       name: state.name,
+    //       exercises: state.selectedExercises,
+    //       lastTrained: [],
+    //     ));
+    //     Navigator.pop(context);
+    //     await Flushbar(
+    //       icon: Icon(Icons.check_circle_outline, color: ConstColors.secondaryColor),
+    //       message: 'Plan erfolgreich erstellt',
+    //       backgroundColor: ConstColors.buttonColor,
+    //       messageColor: ConstColors.secondaryColor,
+    //       duration: Duration(seconds: 3),
+    //     ).show(context);
+    //   }
+    // } else {
+    //   await Flushbar(
+    //     icon: Icon(Icons.error_outline, color: ConstColors.warn),
+    //     message: 'Mindestens eine Übung hinzufügen',
+    //     backgroundColor: ConstColors.buttonColor,
+    //     messageColor: ConstColors.warn,
+    //     duration: Duration(seconds: 3),
+    //   ).show(context);
+    // }
     state = state.copyWith();
   }
 }

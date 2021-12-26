@@ -5,7 +5,6 @@ part 'user_state.g.dart';
 @freezed
 class UserState with _$UserState {
   const factory UserState({
-    required int id,
     required String firebase_id,
     required String userName,
   }) = _UserState;
