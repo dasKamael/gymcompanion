@@ -1,6 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +7,7 @@ import 'package:gymcompanion/components/default_appbar.dart';
 import 'package:gymcompanion/components/default_button.dart';
 import 'package:gymcompanion/constants/constants.dart';
 import 'package:gymcompanion/models/exercise.dart';
-import 'package:gymcompanion/screens/plan/create_plan/create_plan_controller.dart';
+import 'package:gymcompanion/screens/exercises/create_plan/create_plan_controller.dart';
 
 // ignore: must_be_immutable
 class CreatePlanPage extends ConsumerWidget {
@@ -39,7 +38,7 @@ class CreatePlanPage extends ConsumerWidget {
                         name: 'name',
                         style: ConstTextStyles.textField,
                         decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'NAME'),
-                        onChanged: (value) => stateNotifier.setPlanName(value!),
+                        onChanged: (name) => stateNotifier.setPlanName(name!),
                       ),
                       SizedBox(height: 32.0),
                       DropdownSearch<Exercise>.multiSelection(
@@ -50,6 +49,35 @@ class CreatePlanPage extends ConsumerWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(item.name, style: ConstTextStyles.textField),
                         ),
+                        emptyBuilder: (context, searchEntry) {
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            padding:
+                                EdgeInsets.symmetric(horizontal: ConstValues.defaultSidePadding),
+                            child: Column(
+                              children: [
+                                Text('Übung ${searchEntry} nicht gefunden!'),
+                                DropdownButton<String>(
+                                  hint: Text('Select BodyType'),
+                                  items: [
+                                    for (var e in BodyType.values)
+                                      DropdownMenuItem(
+                                        key: Key(e.name),
+                                        value: e.name,
+                                        child: Text(e.name),
+                                      )
+                                  ],
+                                  onChanged: (value) =>
+                                      stateNotifier.setNewExerciseBodyType(value as BodyType),
+                                ),
+                                DefaultButton(
+                                  text: 'Übung erstellen und hinzufügen',
+                                  onClick: () => stateNotifier.addNewExercise(name: searchEntry!),
+                                )
+                              ],
+                            ),
+                          );
+                        },
                         items: state.exercises.map((exercise) => exercise).toSet().toList(),
                         dropdownBuilder: (context, selectedItems) =>
                             Text('SELECT EXERCISE', style: ConstTextStyles.textField),
@@ -69,7 +97,7 @@ class CreatePlanPage extends ConsumerWidget {
                     children: [
                       for (int i = 0; i < state.selectedExercises.length; i++)
                         Dismissible(
-                          key: ValueKey<int>(state.selectedExercises[i].id),
+                          key: ValueKey<String>(state.selectedExercises[i].id),
                           direction: DismissDirection.endToStart,
                           onDismissed: (direction) => ref
                               .read(createPlanProvider.notifier)

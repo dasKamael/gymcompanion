@@ -30,36 +30,15 @@ class AuthController extends StateNotifier<AuthState> {
 
   final Reader _read;
 
-  void changeEmail(String email) {
-    state = state.copyWith(
-      email: email,
-      errorMessage: null,
-    );
-  }
+  void changeEmail(String email) => state = state.copyWith(email: email);
 
-  void changePassword(String password) {
-    state = state.copyWith(
-      password: password,
-    );
-  }
+  void changePassword(String password) => state = state.copyWith(password: password);
 
-  void changeWeight(String weight) {
-    state = state.copyWith(
-      weight: int.parse(weight),
-    );
-  }
+  void changeWeight(String weight) => state = state.copyWith(weight: int.parse(weight));
 
-  void changeHeight(String height) {
-    state = state.copyWith(
-      height: int.parse(height),
-    );
-  }
+  void changeHeight(String height) => state = state.copyWith(height: int.parse(height));
 
-  void changeBirthdate(DateTime birthdate) {
-    state = state.copyWith(
-      birthdate: birthdate,
-    );
-  }
+  void changeBirthdate(DateTime birthdate) => state = state.copyWith(birthdate: birthdate);
 
   void changeUserName(String userName) => state = state.copyWith(userName: userName);
 

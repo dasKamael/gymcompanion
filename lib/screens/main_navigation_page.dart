@@ -11,7 +11,7 @@ class MainNavigationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
       backgroundColor: ConstColors.primaryColor,
-      routes: const [HomeRouter(), TrainingsRouter(), PlansRouter(), ProfileRouter()],
+      routes: const [HomeRouter(), TrainingsRouter(), ExercisesRouter(), ProfileRouter()],
       bottomNavigationBuilder: (_, tabsRouter) {
         return Container(
           decoration: BoxDecoration(

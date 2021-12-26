@@ -5,7 +5,7 @@ import 'package:gymcompanion/screens/init/init_page_state.dart';
 import 'package:gymcompanion/services/auth/auth_repository_impl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final initPageProvider = StateNotifierProvider<InitPageController, InitPageState>(
+final initPageProvider = StateNotifierProvider.autoDispose<InitPageController, InitPageState>(
   (ref) => InitPageController(ref.read),
 );
 

@@ -17,6 +17,9 @@ _$_CreatePlanState _$$_CreatePlanStateFromJson(Map<String, dynamic> json) =>
               ?.map((e) => Exercise.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      newExerciseBodyType:
+          $enumDecodeNullable(_$BodyTypeEnumMap, json['newExerciseBodyType']) ??
+              BodyType.abs,
     );
 
 Map<String, dynamic> _$$_CreatePlanStateToJson(_$_CreatePlanState instance) =>
@@ -24,4 +27,13 @@ Map<String, dynamic> _$$_CreatePlanStateToJson(_$_CreatePlanState instance) =>
       'name': instance.name,
       'exercises': instance.exercises,
       'selectedExercises': instance.selectedExercises,
+      'newExerciseBodyType': _$BodyTypeEnumMap[instance.newExerciseBodyType],
     };
+
+const _$BodyTypeEnumMap = {
+  BodyType.chest: 'chest',
+  BodyType.arms: 'arms',
+  BodyType.back: 'back',
+  BodyType.legs: 'legs',
+  BodyType.abs: 'abs',
+};

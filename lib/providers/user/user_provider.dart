@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/consts.dart';
 import 'package:gymcompanion/providers/providers.dart';
@@ -23,10 +22,10 @@ class UserStateProvider extends StateNotifier<UserState> {
   final Reader _read;
 
   Future<void> getUser() async {
-    final firebaseId = _read(authServiceProvider).getCurrentUser()!.uid;
-
     CollectionReference users =
         _read(firestoreProvider).collection(FirestoreCollections.userCollection);
+
+    final firebaseId = _read(authServiceProvider).getCurrentUser()!.uid;
 
     await users.doc(firebaseId).get().then((DocumentSnapshot data) {
       Map<String, dynamic> user = data.data() as Map<String, dynamic>;

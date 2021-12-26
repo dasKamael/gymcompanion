@@ -8,8 +8,8 @@ import 'package:gymcompanion/models/exercise.dart';
 import 'package:gymcompanion/models/plan.dart';
 import 'package:gymcompanion/providers/plan/plan_provider.dart';
 
-class Planpage extends ConsumerWidget {
-  const Planpage({Key? key}) : super(key: key);
+class Exercisespage extends ConsumerWidget {
+  const Exercisespage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(planProvider);

@@ -31,10 +31,15 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<void> signInWithEmailAndPassword({required String email, required String password}) async {
+  Future<void> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     try {
-      await _read(firebaseAuthProvider)
-          .signInWithEmailAndPassword(email: email, password: password);
+      await _read(firebaseAuthProvider).signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
     } on FirebaseAuthException catch (e) {
       print('Failed with error code: ${e.code}');
       print(e.message);
@@ -42,10 +47,14 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<UserCredential> createUserWithEmailAndPassword(
-      {required String email, required String password}) async {
-    return await _read(firebaseAuthProvider)
-        .createUserWithEmailAndPassword(email: email, password: password);
+  Future<UserCredential> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    return await _read(firebaseAuthProvider).createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
   @override

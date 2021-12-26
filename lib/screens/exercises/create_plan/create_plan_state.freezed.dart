@@ -24,11 +24,13 @@ class _$CreatePlanStateTearOff {
   _CreatePlanState call(
       {String name = '',
       List<Exercise> exercises = const [],
-      List<Exercise> selectedExercises = const []}) {
+      List<Exercise> selectedExercises = const [],
+      BodyType newExerciseBodyType = BodyType.abs}) {
     return _CreatePlanState(
       name: name,
       exercises: exercises,
       selectedExercises: selectedExercises,
+      newExerciseBodyType: newExerciseBodyType,
     );
   }
 
@@ -45,6 +47,7 @@ mixin _$CreatePlanState {
   String get name => throw _privateConstructorUsedError;
   List<Exercise> get exercises => throw _privateConstructorUsedError;
   List<Exercise> get selectedExercises => throw _privateConstructorUsedError;
+  BodyType get newExerciseBodyType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,7 +63,8 @@ abstract class $CreatePlanStateCopyWith<$Res> {
   $Res call(
       {String name,
       List<Exercise> exercises,
-      List<Exercise> selectedExercises});
+      List<Exercise> selectedExercises,
+      BodyType newExerciseBodyType});
 }
 
 /// @nodoc
@@ -77,6 +81,7 @@ class _$CreatePlanStateCopyWithImpl<$Res>
     Object? name = freezed,
     Object? exercises = freezed,
     Object? selectedExercises = freezed,
+    Object? newExerciseBodyType = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -91,6 +96,10 @@ class _$CreatePlanStateCopyWithImpl<$Res>
           ? _value.selectedExercises
           : selectedExercises // ignore: cast_nullable_to_non_nullable
               as List<Exercise>,
+      newExerciseBodyType: newExerciseBodyType == freezed
+          ? _value.newExerciseBodyType
+          : newExerciseBodyType // ignore: cast_nullable_to_non_nullable
+              as BodyType,
     ));
   }
 }
@@ -105,7 +114,8 @@ abstract class _$CreatePlanStateCopyWith<$Res>
   $Res call(
       {String name,
       List<Exercise> exercises,
-      List<Exercise> selectedExercises});
+      List<Exercise> selectedExercises,
+      BodyType newExerciseBodyType});
 }
 
 /// @nodoc
@@ -124,6 +134,7 @@ class __$CreatePlanStateCopyWithImpl<$Res>
     Object? name = freezed,
     Object? exercises = freezed,
     Object? selectedExercises = freezed,
+    Object? newExerciseBodyType = freezed,
   }) {
     return _then(_CreatePlanState(
       name: name == freezed
@@ -138,6 +149,10 @@ class __$CreatePlanStateCopyWithImpl<$Res>
           ? _value.selectedExercises
           : selectedExercises // ignore: cast_nullable_to_non_nullable
               as List<Exercise>,
+      newExerciseBodyType: newExerciseBodyType == freezed
+          ? _value.newExerciseBodyType
+          : newExerciseBodyType // ignore: cast_nullable_to_non_nullable
+              as BodyType,
     ));
   }
 }
@@ -148,7 +163,8 @@ class _$_CreatePlanState implements _CreatePlanState {
   const _$_CreatePlanState(
       {this.name = '',
       this.exercises = const [],
-      this.selectedExercises = const []});
+      this.selectedExercises = const [],
+      this.newExerciseBodyType = BodyType.abs});
 
   factory _$_CreatePlanState.fromJson(Map<String, dynamic> json) =>
       _$$_CreatePlanStateFromJson(json);
@@ -162,10 +178,13 @@ class _$_CreatePlanState implements _CreatePlanState {
   @JsonKey(defaultValue: const [])
   @override
   final List<Exercise> selectedExercises;
+  @JsonKey(defaultValue: BodyType.abs)
+  @override
+  final BodyType newExerciseBodyType;
 
   @override
   String toString() {
-    return 'CreatePlanState(name: $name, exercises: $exercises, selectedExercises: $selectedExercises)';
+    return 'CreatePlanState(name: $name, exercises: $exercises, selectedExercises: $selectedExercises, newExerciseBodyType: $newExerciseBodyType)';
   }
 
   @override
@@ -176,7 +195,9 @@ class _$_CreatePlanState implements _CreatePlanState {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.exercises, exercises) &&
             const DeepCollectionEquality()
-                .equals(other.selectedExercises, selectedExercises));
+                .equals(other.selectedExercises, selectedExercises) &&
+            const DeepCollectionEquality()
+                .equals(other.newExerciseBodyType, newExerciseBodyType));
   }
 
   @override
@@ -184,7 +205,8 @@ class _$_CreatePlanState implements _CreatePlanState {
       runtimeType,
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(exercises),
-      const DeepCollectionEquality().hash(selectedExercises));
+      const DeepCollectionEquality().hash(selectedExercises),
+      const DeepCollectionEquality().hash(newExerciseBodyType));
 
   @JsonKey(ignore: true)
   @override
@@ -201,7 +223,8 @@ abstract class _CreatePlanState implements CreatePlanState {
   const factory _CreatePlanState(
       {String name,
       List<Exercise> exercises,
-      List<Exercise> selectedExercises}) = _$_CreatePlanState;
+      List<Exercise> selectedExercises,
+      BodyType newExerciseBodyType}) = _$_CreatePlanState;
 
   factory _CreatePlanState.fromJson(Map<String, dynamic> json) =
       _$_CreatePlanState.fromJson;
@@ -212,6 +235,8 @@ abstract class _CreatePlanState implements CreatePlanState {
   List<Exercise> get exercises;
   @override
   List<Exercise> get selectedExercises;
+  @override
+  BodyType get newExerciseBodyType;
   @override
   @JsonKey(ignore: true)
   _$CreatePlanStateCopyWith<_CreatePlanState> get copyWith =>

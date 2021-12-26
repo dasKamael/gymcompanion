@@ -21,14 +21,10 @@ Exercise _$ExerciseFromJson(Map<String, dynamic> json) {
 class _$ExerciseTearOff {
   const _$ExerciseTearOff();
 
-  _Exercise call(
-      {required int id,
-      required String name,
-      List<ExerciseSet> sets = const []}) {
+  _Exercise call({required String id, required String name}) {
     return _Exercise(
       id: id,
       name: name,
-      sets: sets,
     );
   }
 
@@ -42,9 +38,8 @@ const $Exercise = _$ExerciseTearOff();
 
 /// @nodoc
 mixin _$Exercise {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<ExerciseSet> get sets => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,7 +51,7 @@ mixin _$Exercise {
 abstract class $ExerciseCopyWith<$Res> {
   factory $ExerciseCopyWith(Exercise value, $Res Function(Exercise) then) =
       _$ExerciseCopyWithImpl<$Res>;
-  $Res call({int id, String name, List<ExerciseSet> sets});
+  $Res call({String id, String name});
 }
 
 /// @nodoc
@@ -71,21 +66,16 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? sets = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      sets: sets == freezed
-          ? _value.sets
-          : sets // ignore: cast_nullable_to_non_nullable
-              as List<ExerciseSet>,
     ));
   }
 }
@@ -95,7 +85,7 @@ abstract class _$ExerciseCopyWith<$Res> implements $ExerciseCopyWith<$Res> {
   factory _$ExerciseCopyWith(_Exercise value, $Res Function(_Exercise) then) =
       __$ExerciseCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String name, List<ExerciseSet> sets});
+  $Res call({String id, String name});
 }
 
 /// @nodoc
@@ -111,21 +101,16 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? sets = freezed,
   }) {
     return _then(_Exercise(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      sets: sets == freezed
-          ? _value.sets
-          : sets // ignore: cast_nullable_to_non_nullable
-              as List<ExerciseSet>,
     ));
   }
 }
@@ -133,23 +118,19 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Exercise implements _Exercise {
-  const _$_Exercise(
-      {required this.id, required this.name, this.sets = const []});
+  const _$_Exercise({required this.id, required this.name});
 
   factory _$_Exercise.fromJson(Map<String, dynamic> json) =>
       _$$_ExerciseFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final String name;
-  @JsonKey(defaultValue: const [])
-  @override
-  final List<ExerciseSet> sets;
 
   @override
   String toString() {
-    return 'Exercise(id: $id, name: $name, sets: $sets)';
+    return 'Exercise(id: $id, name: $name)';
   }
 
   @override
@@ -158,16 +139,14 @@ class _$_Exercise implements _Exercise {
         (other.runtimeType == runtimeType &&
             other is _Exercise &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.sets, sets));
+            const DeepCollectionEquality().equals(other.name, name));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(sets));
+      const DeepCollectionEquality().hash(name));
 
   @JsonKey(ignore: true)
   @override
@@ -181,19 +160,15 @@ class _$_Exercise implements _Exercise {
 }
 
 abstract class _Exercise implements Exercise {
-  const factory _Exercise(
-      {required int id,
-      required String name,
-      List<ExerciseSet> sets}) = _$_Exercise;
+  const factory _Exercise({required String id, required String name}) =
+      _$_Exercise;
 
   factory _Exercise.fromJson(Map<String, dynamic> json) = _$_Exercise.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get name;
-  @override
-  List<ExerciseSet> get sets;
   @override
   @JsonKey(ignore: true)
   _$ExerciseCopyWith<_Exercise> get copyWith =>
