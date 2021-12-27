@@ -72,7 +72,8 @@ class CreatePlanPage extends ConsumerWidget {
                                 ),
                                 DefaultButton(
                                   text: 'Übung erstellen und hinzufügen',
-                                  onClick: () => stateNotifier.addNewExercise(name: searchEntry!),
+                                  onClick: () =>
+                                      stateNotifier.createAndAddNewExercise(name: searchEntry!),
                                 )
                               ],
                             ),

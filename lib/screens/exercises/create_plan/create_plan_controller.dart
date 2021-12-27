@@ -1,13 +1,9 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/constants.dart';
 import 'package:gymcompanion/models/exercise.dart';
-import 'package:gymcompanion/providers/providers.dart';
+import 'package:gymcompanion/providers/exercises/exercise_provider.dart';
 import 'package:gymcompanion/screens/exercises/create_plan/create_plan_state.dart';
-import 'package:gymcompanion/services/auth/auth_repository_impl.dart';
 
 final createPlanProvider =
     StateNotifierProvider.autoDispose<CreatePlanController, CreatePlanState>((ref) {
@@ -25,24 +21,23 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
 
   Reader _read;
 
-  void initCreatePlanPage() {
-    // Get available Exercises
-    getExercises();
+  Future<void> initCreatePlanPage() async {
+    await getExercises();
   }
 
   Future<void> getExercises() async {
-    final firebaseId = _read(authServiceProvider).getCurrentUser()!.uid;
+    List<Exercise> exerciseData = await _read(exerciseProvider.notifier).getExercises();
+    state = state.copyWith(exercises: exerciseData);
+  }
 
-    CollectionReference exercisesReference =
-        _read(firestoreProvider).collection('/Users/${firebaseId}/Exercises');
-    await exercisesReference.get().then((QuerySnapshot exercises) {
-      for (final exercise in exercises.docs) {
-        Map<String, dynamic> exerciseData = exercise.data() as Map<String, dynamic>;
-        log(exerciseData.toString());
-        state.exercises.add(Exercise(id: exercise.id, name: exerciseData['name']));
-      }
-    });
-    state = state.copyWith();
+  Future<void> createAndAddNewExercise({required String name}) async {
+    final Exercise newExercise = await _read(exerciseProvider.notifier).createExercise(
+      name: name,
+      type: state.newExerciseBodyType,
+    );
+
+    state.exercises.add(newExercise);
+    state = state;
   }
 
   void reorderExerciseList(int oldIndex, int newIndex) {
@@ -71,18 +66,5 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
 
   Future<void> createPlan(BuildContext context) async {
     state = state.copyWith();
-  }
-
-  Future<void> addNewExercise({required String name}) async {
-    final firebaseId = _read(authServiceProvider).getCurrentUser()!.uid;
-
-    CollectionReference exercisesReference =
-        _read(firestoreProvider).collection('/Users/${firebaseId}/Exercises');
-
-    DocumentReference addedExercise =
-        await exercisesReference.add({'name': name, 'type': state.newExerciseBodyType.name});
-    log(addedExercise.id);
-    state.exercises.add(Exercise(id: addedExercise.id, name: name));
-    state = state;
   }
 }

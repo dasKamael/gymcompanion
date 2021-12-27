@@ -22,22 +22,27 @@ class UserStateProvider extends StateNotifier<UserState> {
   final Reader _read;
 
   Future<void> getUser() async {
-    CollectionReference users =
-        _read(firestoreProvider).collection(FirestoreCollections.userCollection);
+    CollectionReference users = _read(firestoreProvider).collection(
+      FirestoreCollections.userCollection,
+    );
 
-    final firebaseId = _read(authServiceProvider).getCurrentUser()!.uid;
+    final userId = _read(authServiceProvider).getCurrentUser()!.uid;
 
-    await users.doc(firebaseId).get().then((DocumentSnapshot data) {
-      Map<String, dynamic> user = data.data() as Map<String, dynamic>;
-      state = state.copyWith(
-        firebase_id: firebaseId,
-        userName: user['user_name'],
-        height: user['height'],
-        weight: user['weight'],
-        birthdate: user['birthdate'],
-      );
-      // ignore: invalid_return_type_for_catch_error
-    }).catchError((error) => print('Failed to get user: $error'));
+    await users
+        .doc(userId)
+        .get()
+        .then((DocumentSnapshot data) {
+          Map<String, dynamic> user = data.data() as Map<String, dynamic>;
+          state = state.copyWith(
+            firebase_id: userId,
+            userName: user['user_name'],
+            height: user['height'],
+            weight: user['weight'],
+            birthdate: user['birthdate'],
+          );
+        })
+        .then((_) => print('User fetched'))
+        .catchError((error) => print('Failed to get user: $error'));
   }
 
   Future<void> createUser({
@@ -47,8 +52,9 @@ class UserStateProvider extends StateNotifier<UserState> {
     required int height,
     required DateTime birthdate,
   }) async {
-    CollectionReference users =
-        _read(firestoreProvider).collection(FirestoreCollections.userCollection);
+    CollectionReference users = _read(firestoreProvider).collection(
+      FirestoreCollections.userCollection,
+    );
 
     await users
         .doc(userId)

@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gymcompanion/models/plan.dart';
 import 'package:gymcompanion/providers/plan/plan_state.dart';
 
 final planProvider = StateNotifierProvider<PlanStateProvider, PlanState>(
@@ -19,13 +18,5 @@ class PlanStateProvider extends StateNotifier<PlanState> {
 
   Future<void> getUserPlans() async {}
 
-  void addPlan(Plan plan) {
-    state.plans.add(plan);
-    state = state.copyWith();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  void createAndAddPlan({required String name, required List exercises}) {}
 }
