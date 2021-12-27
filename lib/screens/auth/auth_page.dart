@@ -37,6 +37,7 @@ class LoginComponent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(authControllerProvider);
     final stateNotifier = ref.watch(authControllerProvider.notifier);
     return Align(
       child: SingleChildScrollView(
@@ -50,6 +51,7 @@ class LoginComponent extends ConsumerWidget {
                   FormBuilderTextField(
                     name: 'email',
                     style: ConstTextStyles.textField,
+                    initialValue: state.email,
                     keyboardType: TextInputType.emailAddress,
                     decoration: ConstTextStyles.defaultInput.copyWith(labelText: 'EMAIL'),
                     onChanged: (value) => stateNotifier.changeEmail(value!),

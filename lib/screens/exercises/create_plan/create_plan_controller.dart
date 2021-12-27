@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/constants.dart';
 import 'package:gymcompanion/models/exercise.dart';
+import 'package:gymcompanion/models/plan.dart';
 import 'package:gymcompanion/providers/exercise/exercise_provider.dart';
+import 'package:gymcompanion/providers/plan/plan_provider.dart';
 import 'package:gymcompanion/screens/exercises/create_plan/create_plan_state.dart';
 
 final createPlanProvider =
@@ -13,6 +17,7 @@ final createPlanProvider =
 class CreatePlanController extends StateNotifier<CreatePlanState> {
   CreatePlanController(this._read)
       : super(CreatePlanState(
+          name: '',
           exercises: [],
           selectedExercises: [],
         )) {
@@ -37,7 +42,8 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
     );
 
     state.exercises.add(newExercise);
-    state = state;
+    state.selectedExercises.add(newExercise);
+    state = state.copyWith();
   }
 
   void reorderExerciseList(int oldIndex, int newIndex) {
@@ -65,6 +71,11 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
   void setNewExerciseBodyType(BodyType type) => state = state.copyWith(newExerciseBodyType: type);
 
   Future<void> createPlan(BuildContext context) async {
+    log(state.exercises.toString());
+    await _read(planProvider.notifier).createAndAddPlan(
+      name: state.name,
+      exercises: state.selectedExercises,
+    );
     state = state.copyWith();
   }
 }

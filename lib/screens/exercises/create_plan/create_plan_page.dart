@@ -49,6 +49,7 @@ class CreatePlanPage extends ConsumerWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(item.name, style: ConstTextStyles.textField),
                         ),
+                        searchFieldProps: TextFieldProps(style: ConstTextStyles.textField),
                         emptyBuilder: (context, searchEntry) {
                           return Container(
                             width: MediaQuery.of(context).size.width,
@@ -57,13 +58,13 @@ class CreatePlanPage extends ConsumerWidget {
                             child: Column(
                               children: [
                                 Text('Übung ${searchEntry} nicht gefunden!'),
-                                DropdownButton<String>(
+                                DropdownButton<BodyType>(
                                   hint: Text('Select BodyType'),
                                   items: [
                                     for (var e in BodyType.values)
                                       DropdownMenuItem(
                                         key: Key(e.name),
-                                        value: e.name,
+                                        value: e,
                                         child: Text(e.name),
                                       )
                                   ],

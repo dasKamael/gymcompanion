@@ -6,10 +6,10 @@ part 'plan.g.dart';
 @freezed
 class Plan with _$Plan {
   const factory Plan({
-    required int id,
+    required String id,
     required String name,
     required List<Exercise> exercises,
-    required List<DateTime> lastTrained,
+    required DateTime lastTrained,
   }) = _Plan;
   factory Plan.fromJson(Map<String, dynamic> json) => _$PlanFromJson(json);
 }

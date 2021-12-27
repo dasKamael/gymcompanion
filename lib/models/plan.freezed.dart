@@ -22,10 +22,10 @@ class _$PlanTearOff {
   const _$PlanTearOff();
 
   _Plan call(
-      {required int id,
+      {required String id,
       required String name,
       required List<Exercise> exercises,
-      required List<DateTime> lastTrained}) {
+      required DateTime lastTrained}) {
     return _Plan(
       id: id,
       name: name,
@@ -44,10 +44,10 @@ const $Plan = _$PlanTearOff();
 
 /// @nodoc
 mixin _$Plan {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   List<Exercise> get exercises => throw _privateConstructorUsedError;
-  List<DateTime> get lastTrained => throw _privateConstructorUsedError;
+  DateTime get lastTrained => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -59,10 +59,7 @@ abstract class $PlanCopyWith<$Res> {
   factory $PlanCopyWith(Plan value, $Res Function(Plan) then) =
       _$PlanCopyWithImpl<$Res>;
   $Res call(
-      {int id,
-      String name,
-      List<Exercise> exercises,
-      List<DateTime> lastTrained});
+      {String id, String name, List<Exercise> exercises, DateTime lastTrained});
 }
 
 /// @nodoc
@@ -84,7 +81,7 @@ class _$PlanCopyWithImpl<$Res> implements $PlanCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -96,7 +93,7 @@ class _$PlanCopyWithImpl<$Res> implements $PlanCopyWith<$Res> {
       lastTrained: lastTrained == freezed
           ? _value.lastTrained
           : lastTrained // ignore: cast_nullable_to_non_nullable
-              as List<DateTime>,
+              as DateTime,
     ));
   }
 }
@@ -107,10 +104,7 @@ abstract class _$PlanCopyWith<$Res> implements $PlanCopyWith<$Res> {
       __$PlanCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
-      String name,
-      List<Exercise> exercises,
-      List<DateTime> lastTrained});
+      {String id, String name, List<Exercise> exercises, DateTime lastTrained});
 }
 
 /// @nodoc
@@ -133,7 +127,7 @@ class __$PlanCopyWithImpl<$Res> extends _$PlanCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -145,7 +139,7 @@ class __$PlanCopyWithImpl<$Res> extends _$PlanCopyWithImpl<$Res>
       lastTrained: lastTrained == freezed
           ? _value.lastTrained
           : lastTrained // ignore: cast_nullable_to_non_nullable
-              as List<DateTime>,
+              as DateTime,
     ));
   }
 }
@@ -162,13 +156,13 @@ class _$_Plan implements _Plan {
   factory _$_Plan.fromJson(Map<String, dynamic> json) => _$$_PlanFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final String name;
   @override
   final List<Exercise> exercises;
   @override
-  final List<DateTime> lastTrained;
+  final DateTime lastTrained;
 
   @override
   String toString() {
@@ -208,21 +202,21 @@ class _$_Plan implements _Plan {
 
 abstract class _Plan implements Plan {
   const factory _Plan(
-      {required int id,
+      {required String id,
       required String name,
       required List<Exercise> exercises,
-      required List<DateTime> lastTrained}) = _$_Plan;
+      required DateTime lastTrained}) = _$_Plan;
 
   factory _Plan.fromJson(Map<String, dynamic> json) = _$_Plan.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get name;
   @override
   List<Exercise> get exercises;
   @override
-  List<DateTime> get lastTrained;
+  DateTime get lastTrained;
   @override
   @JsonKey(ignore: true)
   _$PlanCopyWith<_Plan> get copyWith => throw _privateConstructorUsedError;

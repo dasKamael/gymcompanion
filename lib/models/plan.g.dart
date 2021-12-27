@@ -7,20 +7,17 @@ part of 'plan.dart';
 // **************************************************************************
 
 _$_Plan _$$_PlanFromJson(Map<String, dynamic> json) => _$_Plan(
-      id: json['id'] as int,
+      id: json['id'] as String,
       name: json['name'] as String,
       exercises: (json['exercises'] as List<dynamic>)
           .map((e) => Exercise.fromJson(e as Map<String, dynamic>))
           .toList(),
-      lastTrained: (json['lastTrained'] as List<dynamic>)
-          .map((e) => DateTime.parse(e as String))
-          .toList(),
+      lastTrained: DateTime.parse(json['lastTrained'] as String),
     );
 
 Map<String, dynamic> _$$_PlanToJson(_$_Plan instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'exercises': instance.exercises,
-      'lastTrained':
-          instance.lastTrained.map((e) => e.toIso8601String()).toList(),
+      'lastTrained': instance.lastTrained.toIso8601String(),
     };
