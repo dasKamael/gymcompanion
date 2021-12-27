@@ -1,8 +1,8 @@
+import 'package:gymcompanion/providers/auth/auth_provider.dart';
 import 'package:gymcompanion/providers/providers.dart';
 import 'package:gymcompanion/providers/user/user_provider.dart';
 import 'package:gymcompanion/routes.gr.dart';
 import 'package:gymcompanion/screens/init/init_page_state.dart';
-import 'package:gymcompanion/services/auth/auth_repository_impl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final initPageProvider = StateNotifierProvider.autoDispose<InitPageController, InitPageState>(

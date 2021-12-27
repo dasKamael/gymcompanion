@@ -5,8 +5,8 @@ import 'package:gymcompanion/components/default_appbar.dart';
 import 'package:gymcompanion/components/default_button.dart';
 import 'package:gymcompanion/constants/colors.dart';
 import 'package:gymcompanion/constants/consts.dart';
+import 'package:gymcompanion/providers/auth/auth_provider.dart';
 import 'package:gymcompanion/providers/user/user_provider.dart';
-import 'package:gymcompanion/services/auth/auth_repository_impl.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({Key? key}) : super(key: key);

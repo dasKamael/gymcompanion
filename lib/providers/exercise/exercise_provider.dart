@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/body_types.dart';
 import 'package:gymcompanion/models/exercise.dart';
-import 'package:gymcompanion/providers/exercises/exercise_state.dart';
+import 'package:gymcompanion/providers/auth/auth_provider.dart';
+import 'package:gymcompanion/providers/exercise/exercise_state.dart';
 import 'package:gymcompanion/providers/providers.dart';
-import 'package:gymcompanion/services/auth/auth_repository_impl.dart';
 
 final exerciseProvider = StateNotifierProvider<ExerciseController, ExerciseState>((ref) {
   return ExerciseController(ref.read);

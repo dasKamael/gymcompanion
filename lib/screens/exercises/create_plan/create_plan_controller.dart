@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/constants.dart';
 import 'package:gymcompanion/models/exercise.dart';
-import 'package:gymcompanion/providers/exercises/exercise_provider.dart';
+import 'package:gymcompanion/providers/exercise/exercise_provider.dart';
 import 'package:gymcompanion/screens/exercises/create_plan/create_plan_state.dart';
 
 final createPlanProvider =

@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/consts.dart';
+import 'package:gymcompanion/providers/auth/auth_provider.dart';
 import 'package:gymcompanion/providers/providers.dart';
 import 'package:gymcompanion/providers/user/user_state.dart';
-import 'package:gymcompanion/services/auth/auth_repository_impl.dart';
 
 final userProvider = StateNotifierProvider<UserStateProvider, UserState>(
   (ref) => UserStateProvider(ref.read),

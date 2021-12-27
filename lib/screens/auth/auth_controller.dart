@@ -4,10 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/constants/colors.dart';
+import 'package:gymcompanion/providers/auth/auth_provider.dart';
 import 'package:gymcompanion/providers/providers.dart';
 import 'package:gymcompanion/providers/user/user_provider.dart';
 import 'package:gymcompanion/screens/auth/auth_state.dart';
-import 'package:gymcompanion/services/auth/auth_repository_impl.dart';
 
 final authControllerProvider = StateNotifierProvider.autoDispose<AuthController, AuthState>((ref) {
   return AuthController(ref.read);

@@ -1,16 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gymcompanion/providers/auth/auth_repository.dart';
 import 'package:gymcompanion/providers/providers.dart';
-import 'package:gymcompanion/services/auth/auth_repository.dart';
 
 import '../../routes.gr.dart';
 
-final authServiceProvider = Provider<AuthServiceImpl>(
-  (ref) => AuthServiceImpl(ref.read),
+final authServiceProvider = Provider<AuthProvider>(
+  (ref) => AuthProvider(ref.read),
 );
 
-class AuthServiceImpl implements AuthService {
-  AuthServiceImpl(this._read);
+class AuthProvider implements AuthService {
+  AuthProvider(this._read);
 
   final Reader _read;
 
