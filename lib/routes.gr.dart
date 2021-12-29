@@ -11,6 +11,7 @@
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:flutter/material.dart' as _i11;
 
+import 'models/plan.dart' as _i12;
 import 'screens/auth/auth_page.dart' as _i2;
 import 'screens/exercises/create_plan/create_plan_page.dart' as _i9;
 import 'screens/exercises/exercises_page.dart' as _i8;
@@ -64,12 +65,10 @@ class AppRouter extends _i4.RootStackRouter {
           routeData: routeData, child: const _i6.SelectWorkoutPage());
     },
     WorkoutRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<WorkoutRouteArgs>(
-          orElse: () =>
-              WorkoutRouteArgs(planId: pathParams.optString('planId')));
+          orElse: () => const WorkoutRouteArgs());
       return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i7.WorkoutPage(planId: args.planId));
+          routeData: routeData, child: _i7.WorkoutPage(plan: args.plan));
     },
     Exercisespage.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
@@ -200,23 +199,20 @@ class SelectWorkoutRoute extends _i4.PageRouteInfo<void> {
 
 /// generated route for [_i7.WorkoutPage]
 class WorkoutRoute extends _i4.PageRouteInfo<WorkoutRouteArgs> {
-  WorkoutRoute({String? planId})
-      : super(name,
-            path: 'workout',
-            args: WorkoutRouteArgs(planId: planId),
-            rawPathParams: {'planId': planId});
+  WorkoutRoute({_i12.Plan? plan})
+      : super(name, path: 'workout', args: WorkoutRouteArgs(plan: plan));
 
   static const String name = 'WorkoutRoute';
 }
 
 class WorkoutRouteArgs {
-  const WorkoutRouteArgs({this.planId});
+  const WorkoutRouteArgs({this.plan});
 
-  final String? planId;
+  final _i12.Plan? plan;
 
   @override
   String toString() {
-    return 'WorkoutRouteArgs{planId: $planId}';
+    return 'WorkoutRouteArgs{plan: $plan}';
   }
 }
 

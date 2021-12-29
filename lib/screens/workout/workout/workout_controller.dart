@@ -17,8 +17,7 @@ class WorkoutPage extends StateNotifier<WorkoutState> {
 
   // TODO fill state with exercises and update them after workout
 
-  Future<void> getExercises(String planId) async {
-    Plan plan = _read(planProvider).plans.firstWhere((plan) => plan.id == planId);
+  Future<void> getExercises(Plan plan) async {
     state = state.copyWith(exercises: plan.exercises);
   }
 }

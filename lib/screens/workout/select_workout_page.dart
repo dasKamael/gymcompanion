@@ -26,12 +26,17 @@ class SelectWorkoutPage extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  DropdownSearch(
+                  DropdownSearch<Plan>(
                     mode: Mode.BOTTOM_SHEET,
                     showSearchBox: true,
                     dropdownBuilder: (context, selectedItems) =>
                         Text('SELECT PLAN', style: ConstTextStyles.textField),
-                    items: state.plans.map((plan) => plan.name).toSet().toList(),
+                    items: state.plans.toList(),
+                    popupItemBuilder: (context, plan, isSelected) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(plan.name, style: ConstTextStyles.textField),
+                    ),
+                    onChanged: (plan) => ref.read(routeProvider).push(WorkoutRoute(plan: plan)),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),

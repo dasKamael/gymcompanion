@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/components/default_appbar.dart';
 import 'package:gymcompanion/constants/constants.dart';
+import 'package:gymcompanion/models/plan.dart';
 import 'package:gymcompanion/screens/workout/workout/workout_controller.dart';
 
 class WorkoutPage extends ConsumerStatefulWidget {
-  WorkoutPage({@PathParam('planId') this.planId});
+  WorkoutPage({this.plan});
 
-  final String? planId;
+  final Plan? plan;
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _WorkoutPageState();
 }
@@ -16,8 +17,8 @@ class WorkoutPage extends ConsumerStatefulWidget {
 class _WorkoutPageState extends ConsumerState<WorkoutPage> {
   @override
   void initState() {
-    if (widget.planId != null) {
-      ref.read(workoutPageProvider.notifier).getExercises(widget.planId!);
+    if (widget.plan != null) {
+      ref.read(workoutPageProvider.notifier).getExercises(widget.plan!);
     }
     super.initState();
   }
@@ -30,7 +31,7 @@ class _WorkoutPageState extends ConsumerState<WorkoutPage> {
       child: SafeArea(
         child: Column(
           children: [
-            DefaultAppBar(title: 'WORKOUT'),
+            DefaultAppBar(title: widget.plan == null ? 'WORKOUT' : widget.plan!.name),
             Expanded(
               child: ListView.builder(
                 itemCount: 30,
