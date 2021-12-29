@@ -9,19 +9,20 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i4;
-import 'package:flutter/material.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
 
 import 'screens/auth/auth_page.dart' as _i2;
-import 'screens/exercises/create_plan/create_plan_page.dart' as _i8;
-import 'screens/exercises/exercises_page.dart' as _i7;
+import 'screens/exercises/create_plan/create_plan_page.dart' as _i9;
+import 'screens/exercises/exercises_page.dart' as _i8;
 import 'screens/home/home_page.dart' as _i5;
 import 'screens/init/init_page.dart' as _i1;
 import 'screens/main_navigation_page.dart' as _i3;
-import 'screens/profile/profile_page.dart' as _i9;
-import 'screens/training/training_page.dart' as _i6;
+import 'screens/profile/profile_page.dart' as _i10;
+import 'screens/workout/select_workout_page.dart' as _i6;
+import 'screens/workout/workout/workout_page.dart' as _i7;
 
 class AppRouter extends _i4.RootStackRouter {
-  AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
+  AppRouter([_i11.GlobalKey<_i11.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -42,7 +43,7 @@ class AppRouter extends _i4.RootStackRouter {
       return _i4.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.EmptyRouterPage());
     },
-    TrainingsRouter.name: (routeData) {
+    WorkoutRouter.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.EmptyRouterPage());
     },
@@ -58,23 +59,31 @@ class AppRouter extends _i4.RootStackRouter {
       return _i4.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i5.Homepage());
     },
-    TrainingRoute.name: (routeData) {
+    SelectWorkoutRoute.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i6.TrainingPage());
+          routeData: routeData, child: const _i6.SelectWorkoutPage());
+    },
+    WorkoutRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<WorkoutRouteArgs>(
+          orElse: () =>
+              WorkoutRouteArgs(planId: pathParams.optString('planId')));
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData, child: _i7.WorkoutPage(planId: args.planId));
     },
     Exercisespage.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i7.Exercisespage());
+          routeData: routeData, child: const _i8.Exercisespage());
     },
     CreatePlanRoute.name: (routeData) {
       final args = routeData.argsAs<CreatePlanRouteArgs>(
           orElse: () => const CreatePlanRouteArgs());
       return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i8.CreatePlanPage(key: args.key));
+          routeData: routeData, child: _i9.CreatePlanPage(key: args.key));
     },
     ProfileRoute.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i9.ProfilePage());
+          routeData: routeData, child: const _i10.ProfilePage());
     }
   };
 
@@ -92,12 +101,14 @@ class AppRouter extends _i4.RootStackRouter {
                     _i4.RouteConfig(Homepage.name,
                         path: '', parent: HomeRouter.name)
                   ]),
-              _i4.RouteConfig(TrainingsRouter.name,
-                  path: 'training',
+              _i4.RouteConfig(WorkoutRouter.name,
+                  path: 'workout',
                   parent: MainNavigationRoute.name,
                   children: [
-                    _i4.RouteConfig(TrainingRoute.name,
-                        path: '', parent: TrainingsRouter.name)
+                    _i4.RouteConfig(SelectWorkoutRoute.name,
+                        path: '', parent: WorkoutRouter.name),
+                    _i4.RouteConfig(WorkoutRoute.name,
+                        path: 'workout', parent: WorkoutRouter.name)
                   ]),
               _i4.RouteConfig(ExercisesRouter.name,
                   path: 'exercises',
@@ -150,11 +161,11 @@ class HomeRouter extends _i4.PageRouteInfo<void> {
 }
 
 /// generated route for [_i4.EmptyRouterPage]
-class TrainingsRouter extends _i4.PageRouteInfo<void> {
-  const TrainingsRouter({List<_i4.PageRouteInfo>? children})
-      : super(name, path: 'training', initialChildren: children);
+class WorkoutRouter extends _i4.PageRouteInfo<void> {
+  const WorkoutRouter({List<_i4.PageRouteInfo>? children})
+      : super(name, path: 'workout', initialChildren: children);
 
-  static const String name = 'TrainingsRouter';
+  static const String name = 'WorkoutRouter';
 }
 
 /// generated route for [_i4.EmptyRouterPage]
@@ -180,23 +191,45 @@ class Homepage extends _i4.PageRouteInfo<void> {
   static const String name = 'Homepage';
 }
 
-/// generated route for [_i6.TrainingPage]
-class TrainingRoute extends _i4.PageRouteInfo<void> {
-  const TrainingRoute() : super(name, path: '');
+/// generated route for [_i6.SelectWorkoutPage]
+class SelectWorkoutRoute extends _i4.PageRouteInfo<void> {
+  const SelectWorkoutRoute() : super(name, path: '');
 
-  static const String name = 'TrainingRoute';
+  static const String name = 'SelectWorkoutRoute';
 }
 
-/// generated route for [_i7.Exercisespage]
+/// generated route for [_i7.WorkoutPage]
+class WorkoutRoute extends _i4.PageRouteInfo<WorkoutRouteArgs> {
+  WorkoutRoute({String? planId})
+      : super(name,
+            path: 'workout',
+            args: WorkoutRouteArgs(planId: planId),
+            rawPathParams: {'planId': planId});
+
+  static const String name = 'WorkoutRoute';
+}
+
+class WorkoutRouteArgs {
+  const WorkoutRouteArgs({this.planId});
+
+  final String? planId;
+
+  @override
+  String toString() {
+    return 'WorkoutRouteArgs{planId: $planId}';
+  }
+}
+
+/// generated route for [_i8.Exercisespage]
 class Exercisespage extends _i4.PageRouteInfo<void> {
   const Exercisespage() : super(name, path: '');
 
   static const String name = 'Exercisespage';
 }
 
-/// generated route for [_i8.CreatePlanPage]
+/// generated route for [_i9.CreatePlanPage]
 class CreatePlanRoute extends _i4.PageRouteInfo<CreatePlanRouteArgs> {
-  CreatePlanRoute({_i10.Key? key})
+  CreatePlanRoute({_i11.Key? key})
       : super(name, path: 'createPlan', args: CreatePlanRouteArgs(key: key));
 
   static const String name = 'CreatePlanRoute';
@@ -205,7 +238,7 @@ class CreatePlanRoute extends _i4.PageRouteInfo<CreatePlanRouteArgs> {
 class CreatePlanRouteArgs {
   const CreatePlanRouteArgs({this.key});
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   @override
   String toString() {
@@ -213,7 +246,7 @@ class CreatePlanRouteArgs {
   }
 }
 
-/// generated route for [_i9.ProfilePage]
+/// generated route for [_i10.ProfilePage]
 class ProfileRoute extends _i4.PageRouteInfo<void> {
   const ProfileRoute() : super(name, path: '');
 

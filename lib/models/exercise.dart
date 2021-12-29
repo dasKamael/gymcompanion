@@ -7,6 +7,7 @@ class Exercise with _$Exercise {
   const factory Exercise({
     required String id,
     required String name,
+    required DateTime lastTrained,
   }) = _Exercise;
   factory Exercise.fromJson(Map<String, dynamic> json) => _$ExerciseFromJson(json);
 }

@@ -76,6 +76,7 @@ class CreatePlanController extends StateNotifier<CreatePlanState> {
       name: state.name,
       exercises: state.selectedExercises,
     );
+    Navigator.pop(context);
     state = state.copyWith();
   }
 }

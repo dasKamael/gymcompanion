@@ -7,19 +7,27 @@ import 'package:gymcompanion/constants/constants.dart';
 import 'package:gymcompanion/models/exercise.dart';
 import 'package:gymcompanion/models/plan.dart';
 import 'package:gymcompanion/providers/plan/plan_provider.dart';
+import 'package:gymcompanion/screens/exercises/exercises_controller.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class Exercisespage extends ConsumerWidget {
   const Exercisespage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(planProvider);
+    final stateNotifier = ref.watch(exercisePageProvider.notifier);
     return Container(
       color: ConstColors.primaryColor,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: ConstValues.defaultSidePadding),
-        child: SingleChildScrollView(
-          child: SafeArea(
-            child: Column(
+      child: SafeArea(
+        child: LiquidPullToRefresh(
+          backgroundColor: ConstColors.primaryColor,
+          color: ConstColors.secondaryColor,
+          animSpeedFactor: 4,
+          showChildOpacityTransition: false,
+          onRefresh: () => stateNotifier.getPlans(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: ConstValues.defaultSidePadding),
+            child: ListView(
               children: [
                 DefaultAppBar(
                   title: 'TRAININGSPLÄNE',
@@ -56,7 +64,10 @@ class Exercisespage extends ConsumerWidget {
                         textColor: ConstColors.secondaryColor,
                         collapsedIconColor: ConstColors.secondaryColor,
                         childrenPadding: EdgeInsets.all(16.0),
-                        title: Text(p.name),
+                        title: Text(
+                          p.name,
+                          style: ConstTextStyles.textField,
+                        ),
                         children: [
                           Row(
                             children: [
@@ -74,7 +85,7 @@ class Exercisespage extends ConsumerWidget {
                                 children: [
                                   Text('REPS', style: ConstTextStyles.subtle12),
                                   for (Exercise e in p.exercises)
-                                    Text(e.id.toString(), style: ConstTextStyles.subtle20)
+                                    Text(e.name, style: ConstTextStyles.subtle20)
                                 ],
                               ),
                               SizedBox(width: ConstValues.defaultSidePadding),
@@ -88,16 +99,6 @@ class Exercisespage extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 16.0),
-                          Center(
-                            child: InkWell(
-                              onTap: () {},
-                              child: Text(
-                                'DETAILS',
-                                style: ConstTextStyles.header1.copyWith(fontSize: 18),
-                              ),
-                            ),
-                          )
                         ],
                       ),
                     ),

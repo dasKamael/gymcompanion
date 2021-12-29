@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gymcompanion/constants/colors.dart';
-import 'package:gymcompanion/constants/consts.dart';
-import 'package:gymcompanion/constants/text_styles.dart';
+import 'package:gymcompanion/constants/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DefaultAppBar extends ConsumerWidget {
@@ -23,7 +21,6 @@ class DefaultAppBar extends ConsumerWidget {
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       centerTitle: true,
-      leadingWidth: ConstValues.defaultSidePadding,
       elevation: 0,
       leading: leading,
       title: Text(

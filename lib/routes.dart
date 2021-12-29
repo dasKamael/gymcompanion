@@ -6,7 +6,8 @@ import 'package:gymcompanion/screens/main_navigation_page.dart';
 import 'package:gymcompanion/screens/exercises/create_plan/create_plan_page.dart';
 import 'package:gymcompanion/screens/exercises/exercises_page.dart';
 import 'package:gymcompanion/screens/profile/profile_page.dart';
-import 'package:gymcompanion/screens/training/training_page.dart';
+import 'package:gymcompanion/screens/workout/select_workout_page.dart';
+import 'package:gymcompanion/screens/workout/workout/workout_page.dart';
 
 @MaterialAutoRouter(replaceInRouteName: 'Page,Route', routes: <AutoRoute>[
   AutoRoute(
@@ -31,11 +32,12 @@ import 'package:gymcompanion/screens/training/training_page.dart';
         ],
       ),
       AutoRoute(
-        path: 'training',
-        name: 'TrainingsRouter',
+        path: 'workout',
+        name: 'WorkoutRouter',
         page: EmptyRouterPage,
         children: [
-          AutoRoute(path: '', page: TrainingPage),
+          AutoRoute(path: '', page: SelectWorkoutPage),
+          AutoRoute(path: 'workout', page: WorkoutPage),
         ],
       ),
       AutoRoute(

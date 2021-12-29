@@ -30,7 +30,13 @@ class ExerciseController extends StateNotifier<ExerciseState> {
       await exercisesReference.get().then((QuerySnapshot exercises) {
         for (final exercise in exercises.docs) {
           Map<String, dynamic> exerciseData = exercise.data() as Map<String, dynamic>;
-          state.exercises.add(Exercise(id: exercise.id, name: exerciseData['name']));
+          state.exercises.add(Exercise(
+            id: exercise.id,
+            name: exerciseData['name'],
+            lastTrained: exerciseData['last_traied'] == null
+                ? DateTime.fromMillisecondsSinceEpoch(0)
+                : exerciseData['last_traied'].toDate(),
+          ));
         }
       });
     }
@@ -51,7 +57,11 @@ class ExerciseController extends StateNotifier<ExerciseState> {
       'type': type.name,
     });
 
-    final newExercise = Exercise(id: addedExercise.id, name: name);
+    final newExercise = Exercise(
+      id: addedExercise.id,
+      name: name,
+      lastTrained: DateTime.fromMillisecondsSinceEpoch(0),
+    );
 
     state.exercises.add(newExercise);
 

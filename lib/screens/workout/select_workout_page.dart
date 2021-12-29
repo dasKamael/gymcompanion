@@ -5,10 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymcompanion/components/default_appbar.dart';
 import 'package:gymcompanion/components/default_button.dart';
 import 'package:gymcompanion/constants/constants.dart';
+import 'package:gymcompanion/models/plan.dart';
 import 'package:gymcompanion/providers/plan/plan_provider.dart';
+import 'package:gymcompanion/providers/providers.dart';
+import 'package:gymcompanion/routes.gr.dart';
 
-class TrainingPage extends ConsumerWidget {
-  const TrainingPage({Key? key}) : super(key: key);
+class SelectWorkoutPage extends ConsumerWidget {
+  const SelectWorkoutPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(planProvider);
@@ -37,7 +40,10 @@ class TrainingPage extends ConsumerWidget {
                       style: ConstTextStyles.subtle20,
                     ),
                   ),
-                  DefaultButton(text: 'INDIVIDUELLES TRAINING', onClick: () {}),
+                  DefaultButton(
+                    text: 'INDIVIDUELLES TRAINING',
+                    onClick: () => ref.read(routeProvider).push(WorkoutRoute()),
+                  ),
                 ],
               ),
             ),
