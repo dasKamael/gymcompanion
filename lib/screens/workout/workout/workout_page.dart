@@ -25,7 +25,7 @@ class _WorkoutPageState extends ConsumerState<WorkoutPage> {
 
   @override
   Widget build(BuildContext context) {
-    final plan = ref.watch(workoutPageProvider);
+    final state = ref.watch(workoutPageProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: ConstValues.defaultSidePadding),
       child: SafeArea(
@@ -34,10 +34,32 @@ class _WorkoutPageState extends ConsumerState<WorkoutPage> {
             DefaultAppBar(title: widget.plan == null ? 'WORKOUT' : widget.plan!.name),
             Expanded(
               child: ListView.builder(
-                itemCount: 30,
+                itemCount: state.exercises.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text('haha'),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: ConstValues.defaultSidePadding,
+                      vertical: ConstValues.defaultSidePadding / 2,
+                    ),
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(ConstValues.defaultSidePadding),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF333849),
+                        borderRadius:
+                            BorderRadius.circular(ConstValues.defaultTextFieldBorderRadius),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            state.exercises[index].name,
+                            style: ConstTextStyles.textField,
+                          ),
+                          Icon(Icons.keyboard_arrow_down, color: ConstColors.secondaryColor),
+                        ],
+                      ),
+                    ),
                   );
                 },
               ),
